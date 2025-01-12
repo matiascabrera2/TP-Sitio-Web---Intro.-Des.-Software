@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:15
+    ports:
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - ./.env 
+    volumes:
+      - ./.volumes/postgres/data:/var/lib/postgresql/data/
+
+  frontend:
+    build: ./todo_frontend
+    ports:
+      - "4000:80"
+
+  backend:
+    build:
+      context: ./todo_backend 
+      args:
+        USERNAME: ${USER_NAME}  # Se pasa la variable USER_NAME desde el archivo .env
+    ports:
+      - "5000:5000"             # mappea 5000 del pc al conteiner
+    depends_on:
+      - postgres  
+    env_file:
+      - ./.env
