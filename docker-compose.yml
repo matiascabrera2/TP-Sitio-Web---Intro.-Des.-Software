@@ -15,10 +15,10 @@ services:
 
   backend:
     build:
-      context: ./todo_backend 
+      context: ./todo_backend
     ports:
-      - "5000:5000"             # mappea 5000 del pc al conteiner
+      - "5000:5000"     # mappea 5000 del pc al conteiner
     depends_on:
-      - postgres  
+      - postgres
     env_file:
       - ./.env

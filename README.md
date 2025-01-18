@@ -9,6 +9,7 @@ El backend está construido en **JavaScript** utilizando el servicio de **Nodemo
 - **Frontend:** HTML, CSS, JavaScript.
 - **Backend:** Node.js con Nodemon.
 - **Framework:** Express.js
+- **ORM:** Prisma
 - **Base de datos:** PostgreSQL --- pgadmin4
 - **Contenedor:** Docker para la configuración y despliegue del entorno.
 - **API Testing y Documentación:** Postman
@@ -45,7 +46,8 @@ npm i express pg nodemon
 - Recordar agregar el type: module, para las extesiones `import ... from ...`
 
 ### 2. Configurar variables de entorno
-En caso de no tenerlo, crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+En caso de no tenerlo, crea un archivo `.env` en la raíz del proyecto (si no se creó automáticamente al instalar Prisma) 
+con las siguientes variables:
 
 ```bash
 # Configuracion del Frontend
@@ -63,6 +65,10 @@ POSTGRES_DB=db_sqlazo
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 PGDATA=/var/lib/postgresql/data/pgdata  # Ruta de almacenamiento de datos de PostgreSQL
+
+# Configuración de Prisma y Base de Datos
+# Ejemplo para la lectura = postrgresql://user:passwordeserver:port/db_name
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/db_sqlazo?schema=public"
 ```
 Asegúrate de reemplazar los valores por los correspondientes a tu entorno local (DB_USER, DB_PASSWORD, etc).
 
