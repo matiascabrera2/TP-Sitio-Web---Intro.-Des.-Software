@@ -1,7 +1,5 @@
 FROM node:latest
 
-ARG USERNAME
-
 RUN npm i -g nodemon
 
 WORKDIR /app

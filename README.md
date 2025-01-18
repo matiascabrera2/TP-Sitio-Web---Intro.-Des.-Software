@@ -48,8 +48,8 @@ npm i express pg nodemon
 En caso de no tenerlo, crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
 ```bash
-# Nombre del usuario del sistema
-USER_NAME=tu_nombre_usuario
+# Configuracion del Frontend
+FRONTEND_PORT=5500
 
 # Configuración del Backend
 BACKEND_PORT=5000
