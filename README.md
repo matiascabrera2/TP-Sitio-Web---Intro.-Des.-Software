@@ -39,12 +39,6 @@ git clone git@github.com:matiascabrera2/TP-Sitio-Web---Intro.-Des.-Software.git
 cd TP-Sitio-Web---Intro.-Des.-Software.git
 ```
 
-### Instalar dependencias y inicializar .json package   --- Esta parte se elimina creo
-```bash
-npm i express pg nodemon
-```
-- Recordar agregar el type: module, para las extesiones `import ... from ...`
-
 ### 2. Configurar variables de entorno
 En caso de no tenerlo, crea un archivo `.env` en la raíz del proyecto (si no se creó automáticamente al instalar Prisma) 
 con las siguientes variables:
@@ -104,7 +98,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose up --build
 ```
 3. El backend estará disponible en lo especificado en `docker-compose.yml`.
-    - En general, se encontrará en `http://localhost:3000`.
+    - En general, se encontrará en `http://localhost:5000`.
 
 ## Pruebas
 
@@ -112,7 +106,7 @@ Puedes probar la API usando herramientas como Postman o cURL.
 - Ejemplo para listar los libros:
 
 ```bash
-curl http://localhost:3000/api/libros
+curl http://localhost:5000/api/libros
 ```
 - En caso de usar postman, utiliza la solicitud correspondiente.
 La documentación de la API generada por Postman aun no esta disponible. Por ahora, puedes probar la API usando curl o postman con la direcciones aclaradas en la seccion `Rutas de la API`.
