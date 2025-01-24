@@ -12,6 +12,6 @@
     "prisma": "^6.2.1"
   },
   "scripts": {
-    "migrate": "dotenv -e /home/liizoe/Desktop/TP-Sitio-Web---Intro.-Des.-Software/.env -- npx prisma migrate dev --name"
+    "migrate": "dotenv -e ./../../.env -- npx prisma migrate dev --name"
   }
 }

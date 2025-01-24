@@ -133,3 +133,33 @@ La documentación de la API generada por Postman aun no esta disponible. Por aho
 - **GET** `/api/prestamos/:id`: Detalles de un préstamo específico.
 - **PUT** `/api/prestamos/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
 - **DELETE** `/api/prestamos/:id`: Elimina un registro de préstamo.
+
+## Cómo hacer una migración con Prisma
+
+Afortunadamente, Prisma ya está configurado para cargar las variables de entorno necesarias, por lo que puedes realizar migraciones fácilmente.
+**Aclaración importante:** ES importante estar posicionado en el directorio de prisma para hacer estos comandos, por que de otra manera podria dar errores innesperados.
+
+#### 1. **Pruebas rapidas sin configuraciones adicionales (sin dotenv-cli):**
+
+Si aún no has configurado las variables de entorno, primero exporta la variable `DATABASE_URL` y luego crea la migración:
+
+```bash
+export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/db_sqlazo?schema=public"
+npx prisma migrate dev --name initial-schema
+```
+Esto creará la migración inicial y la aplicará a la base de datos.
+
+#### 2. **Para configurar y tenerlo preparado (con script/dotenv-cli):**
+En package.json deberias de tener algo como esto:
+
+```json
+  "scripts": {
+    "migrate": "dotenv -e ./../../.env -- npx prisma migrate dev --name"
+  }
+```
+Este script buscará el archivo .env en la carpeta raíz del proyecto. En caso de tenerlo de esta manera, simplemente ejecuta el siguiente comando para la migracion:
+
+```bash
+npm run migrate -- migration-name
+```
+Donde migration-name es el nombre de la migración que elijas.
