@@ -15,7 +15,7 @@ model Author {
   biography   String
   stock_books Int
 
-  books Book[] // representa todos los libros que pertenecen a un autor
+  books Book[]
 
 }
 
@@ -23,15 +23,15 @@ model Book {
   id               Int      @id @default(autoincrement())
   author           Author   @relation(fields: [author_id], references: [id])
   author_id        Int
-  availability     String // Con stock  o sin stock disponible(Disponible o no disponible) --- esto se podria actualizar con un if-statement
-  stock            Int      @default(0) // Idealmente se carga esto por frontend-backend pero si no se especifica se pone 0 
+  availability     String 
+  stock            Int      @default(0)
   title            String
   publication_date DateTime
   genre            String
   language         String
   loan_price       Decimal
 
-  loans Loans[] // relacion de un libro que puede ser prestado varias veces segun el stock
+  loans Loans[]
 
 }
 

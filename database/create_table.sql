@@ -1,33 +1,33 @@
-create table autor (
+create table Author (
     id serial primary key,
-    name string not null,
-    nacionality string not null,
+    name varchar not null,
+    nacionality varchar not null,
     born_date date not null,
-    biografity string not null,
+    biografity varchar not null,
     stock_books integer,
     
 )
 
-create table libro (
+create table Books (
     id serial primary key,
-    availability string not null,
-    titulo string not null,
-    autor_id integer not null,
+    availability varchar not null,
+    titulo varchar not null,
+    author_id integer not null,
     publication_date date not null,
-    genre string not null,
-    language string not null,
+    genre varchar not null,
+    language varchar not null,
     pages integer not null,
     loan_price decimal not null,
-    foreign key (autor_id) references autor(id)
+    foreign key (author_id) references Author(id)
 )
 
-create table prestamo (
+create table Loans (
     id serial primary key,
-    reader string not null,
-    libro_id integer not null,
+    reader varchar not null,
+    book_id integer not null,
     loan_date date not null,
     return_date date not null,
     price decimal not null,
-    foreign key (libro_id) references libro(id)
+    foreign key (book_id) references Books(id)
 )
 
