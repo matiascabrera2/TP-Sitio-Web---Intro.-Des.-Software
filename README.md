@@ -96,6 +96,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 2. Ejecutar el siguiente comando en la raíz del proyecto:
 ```bash
+docker-compose down --volumes
 docker-compose up --build
 ```
 3. El backend estará disponible en lo especificado en `docker-compose.yml`.
@@ -138,6 +139,7 @@ La documentación de la API generada por Postman aun no esta disponible. Por aho
 ## Cómo hacer una migración con Prisma
 
 **Aclaración importante:** Es importante estar posicionado en el directorio de prisma para hacer estos comandos, por que de otra manera podria dar errores innesperados.
+
 Afortunadamente, Prisma ya está configurado para cargar las variables de entorno necesarias, por lo que puedes realizar migraciones fácilmente.
 
 #### 1. **Pruebas rapidas sin configuraciones adicionales (sin dotenv-cli):**

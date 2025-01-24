@@ -1,11 +1,16 @@
-import express from 'express' 
-// import { pool } from './db.js' //Importa la conexión a la base de datos
-// import carreraRoutes from './routes/carreras.routes.js' //Importa las rutas de carrera
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
 
-const app = express() //Crea una instancia de express
+
+
+const app = express()
 const PORT = process.env.BACKEND_PORT ?? 3000;
 
-// app.use(algo)
+const prisma = new PrismaClient();
+
+app.use(express.json());
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
