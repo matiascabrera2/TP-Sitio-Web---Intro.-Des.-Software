@@ -56,14 +56,33 @@ app.post('/api/books', async (req, res) =>{
     res.status(201).send(author)
 })
 
-app.put('/api/books/:id', async (req, res) => {
-    // actualiza reescribiendo todos los datos de un libro
+//  COMO AXIOS MANEJA AUTOMATICAMENTE LOS CASOS UNDEFINED, o sea, no los utiliza, realmente
+//  patch o put, vienen a ser la misma cosa, por como se maneja axios mas que nada
+app.patch('/api/books/:id', async (req, res) => {
+    let author = await prisma.author.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    if (author === null) {
+        res.sendStatus(404);
+        return;
+    }
 
-})
+    author = await prisma.author.update({
+        where: {
+            id: author.id
+        },
+        data: {
+            name: req.body.name,
+            nationality: req.body.nationality,
+            born_date: req.body.born_date,    
+            biography: req.body.biography,
+            stock_books: req.body.stock_books
+        }
+    })
 
-app.put('/api/books/:id', async (req, res) => {
-    // actualiza parcialmente, reescribiendo los datos ingresados de un libro
-
+    res.send(author);
 })
 
 app.delete('/api/books/:id', async (req, res) => {
