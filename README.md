@@ -84,7 +84,8 @@ sudo sh get-docker.sh
 sudo systemctl enable docker
 sudo systemctl start docker
 ```
-    - OPCIONAL --- Si deseas ejecutar Docker sin usar sudo cada vez, puedes agregar tu usuario al grupo Docker:
+
+- OPCIONAL --- Si deseas ejecutar Docker sin usar sudo cada vez, puedes agregar tu usuario al grupo Docker:
 ```bash
 sudo usermod -aG docker $USER
 ```
@@ -136,8 +137,8 @@ La documentación de la API generada por Postman aun no esta disponible. Por aho
 
 ## Cómo hacer una migración con Prisma
 
+**Aclaración importante:** Es importante estar posicionado en el directorio de prisma para hacer estos comandos, por que de otra manera podria dar errores innesperados.
 Afortunadamente, Prisma ya está configurado para cargar las variables de entorno necesarias, por lo que puedes realizar migraciones fácilmente.
-**Aclaración importante:** ES importante estar posicionado en el directorio de prisma para hacer estos comandos, por que de otra manera podria dar errores innesperados.
 
 #### 1. **Pruebas rapidas sin configuraciones adicionales (sin dotenv-cli):**
 
@@ -162,4 +163,4 @@ Este script buscará el archivo .env en la carpeta raíz del proyecto. En caso d
 ```bash
 npm run migrate -- migration-name
 ```
-Donde migration-name es el nombre de la migración que elijas.
+Donde `migration-name` es el nombre de la migración que elijas.
