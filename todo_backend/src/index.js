@@ -22,13 +22,13 @@ app.get('/', async (req, res) => {
 });
 
 //  ------- ENDPOINTS --------
-app.get('/api/libros',  async (req, res) => {
+app.get('/api/books',  async (req, res) => {
     // Busco listar todo
     const authors = await prisma.author.findMany()
     res.json(authors)
 })
 
-app.get('/api/libros/:id', async (req, res) => {
+app.get('/api/books/:id', async (req, res) => {
     // Busco listar solo un libro
     const author = await prisma.author.findUnique({
         where: {
@@ -44,20 +44,29 @@ app.get('/api/libros/:id', async (req, res) => {
 
 app.post('/api/books', async (req, res) =>{
     // Agrega nuevo libro/autore
-
+    const author = await prisma.author.create({
+        data: {
+            name: req.body.name,
+            nationality: req.body.nationality,
+            born_date: req.body.born_date,    // ACA TENGO QUE HACERLO CON UN COMANDO SEGURAMENTE 
+            biography: req.body.biography,
+            stock_books: req.body.stock_books
+        }
+    })
+    res.status(201).send(author)
 })
 
-app.put('/api/libros/:id', async (req, res) => {
+app.put('/api/books/:id', async (req, res) => {
     // actualiza reescribiendo todos los datos de un libro
 
 })
 
-app.put('/api/libros/:id', async (req, res) => {
+app.put('/api/books/:id', async (req, res) => {
     // actualiza parcialmente, reescribiendo los datos ingresados de un libro
 
 })
 
-app.delete('/api/libros/:id', async (req, res) => {
+app.delete('/api/books/:id', async (req, res) => {
     // Borrar un libro en especifico
 })
 
