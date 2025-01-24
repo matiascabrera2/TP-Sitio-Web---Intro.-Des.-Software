@@ -15,24 +15,26 @@ model Author {
   biography   String
   stock_books Int
 
-  books Book[]
+  books Book[] // representa todos los libros que pertenecen a un autor
 
+  // @@map("autor") // Mapea Author con la tabla "autor" --- USAR EN CASO DE SER NECESARIO
 }
 
 model Book {
   id               Int      @id @default(autoincrement())
   author           Author   @relation(fields: [author_id], references: [id])
   author_id        Int
-  availability     String 
-  stock            Int      @default(0)
+  availability     String // Con stock  o sin stock disponible(Disponible o no disponible) --- esto se podria actualizar con un if-statement
+  stock            Int      @default(0) // Idealmente se carga esto por frontend-backend pero si no se especifica se pone 0 
   title            String
   publication_date DateTime
   genre            String
   language         String
   loan_price       Decimal
 
-  loans Loans[]
+  loans Loans[] // relacion de un libro que puede ser prestado varias veces segun el stock
 
+  // @@map("libro") // Mapea el Book con la tabla "libro"  --- USAR EN CASO DE SER NECESARIO
 }
 
 model Loans {
@@ -44,4 +46,5 @@ model Loans {
   loan_date   DateTime
   return_date DateTime
 
+  // @@map("prestamos") // Mapea el Loan con la tabla "prestamos"  --- USAR EN CASO DE SER NECESARIO
 }
