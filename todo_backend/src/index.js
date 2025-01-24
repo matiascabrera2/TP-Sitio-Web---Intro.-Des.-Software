@@ -30,6 +30,16 @@ app.get('/api/libros',  async (req, res) => {
 
 app.get('/api/libros/:id', async (req, res) => {
     // Busco listar solo un libro
+    const author = await prisma.author.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    }) 
+    if (author === null){
+        res.sendStatus(404)
+        return
+    }
+    res.json(author)
 })
 
 app.post('/api/books', async (req, res) =>{
