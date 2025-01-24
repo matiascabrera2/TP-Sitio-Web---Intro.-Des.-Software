@@ -87,6 +87,23 @@ app.patch('/api/books/:id', async (req, res) => {
 
 app.delete('/api/books/:id', async (req, res) => {
     // Borrar un libro en especifico
+    const author = await prisma.author.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    if (author === null) {
+        res.sendStatus(404);
+        return;
+    } 
+
+    await prisma.author.delete({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    }) 
+
+    res.send(author); 
 })
 
 app.listen(PORT, () => {
