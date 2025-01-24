@@ -15,10 +15,10 @@ app.get('/', async (req, res) => {
     try {
         const response = await axios.get('http://frontend:80/index.html');
         res.send(response.data);
-        } catch (error) {
-        console.error('Error al obtener la página estática:', error);
-        res.status(500).send('No se pudo obtener la página estática');
-        }
+    } catch (error) {
+        console.error('Se produjo un error:', error);
+        res.status(404).send('No se pudo obtener la página');
+    }
 });
 
 //  ------- ENDPOINTS --------
