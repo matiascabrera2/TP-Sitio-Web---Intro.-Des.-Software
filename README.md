@@ -102,13 +102,21 @@ docker-compose up --build
 3. El backend estará disponible en lo especificado en `docker-compose.yml`.
     - En general, se encontrará en `http://localhost:5000`.
 
+- OPCIONAL --- Si deseas limpiar todo Docker y liberar espacio en memoria:
+```bash
+#Si deseas ver cuanto espacio liberal antes de ejecutar el comando
+docker system df
+```
+```bash
+docker system prune -a --volumes
+```
 ## Pruebas
 
 Puedes probar la API usando herramientas como Postman o cURL. 
 - Ejemplo para listar los libros:
 
 ```bash
-curl http://localhost:5000/api/libros
+curl http://localhost:5000/api/books
 ```
 - En caso de usar postman, utiliza la solicitud correspondiente.
 La documentación de la API generada por Postman aun no esta disponible. Por ahora, puedes probar la API usando curl o postman con la direcciones aclaradas en la seccion `Rutas de la API`.
@@ -116,25 +124,25 @@ La documentación de la API generada por Postman aun no esta disponible. Por aho
 ## Rutas de la API --- DE MOMENTO ESTO ES UN ESBOZO
 
 ### 1. Libros (/api/libros)
-- **GET** `/api/libros`: Obtiene la lista de todos los libros.
-- **POST** `/api/libros`: Agrega un nuevo libro.
-- **GET** `/api/libros/:id`: Obtiene los detalles de un libro por su ID.
-- **PUT** `/api/libros/:id`: Modifica los datos de un libro existente.
-- **DELETE** `/api/libros/:id`: Elimina un libro.
+- **GET** `/api/books`: Obtiene la lista de todos los libros.
+- **POST** `/api/books`: Agrega un nuevo libro.
+- **GET** `/api/books/:id`: Obtiene los detalles de un libro por su ID.
+- **PUT** `/api/books/:id`: Modifica los datos de un libro existente.
+- **DELETE** `/api/books/:id`: Elimina un libro.
 
 ### 2. Autores (/api/autores)
-- **GET** `/api/autores`: Lista todos los autores.
-- **POST** `/api/autores`: Agrega un nuevo autor.
-- **GET** `/api/autores/:id`: Obtiene información de un autor específico.
-- **PUT** `/api/autores/:id`: Modifica los datos de un autor existente.
-- **DELETE** `/api/autores/:id`: Elimina un autor.
+- **GET** `/api/authors`: Lista todos los autores.
+- **POST** `/api/authors`: Agrega un nuevo autor.
+- **GET** `/api/authors/:id`: Obtiene información de un autor específico.
+- **PUT** `/api/authors/:id`: Modifica los datos de un autor existente.
+- **DELETE** `/api/authors/:id`: Elimina un autor.
 
 ### 3. Préstamos (/api/prestamos)
-- **GET** `/api/prestamos`: Lista todos los préstamos registrados.
-- **POST** `/api/prestamos`: Registra un nuevo préstamo.
-- **GET** `/api/prestamos/:id`: Detalles de un préstamo específico.
-- **PUT** `/api/prestamos/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
-- **DELETE** `/api/prestamos/:id`: Elimina un registro de préstamo.
+- **GET** `/api/loans`: Lista todos los préstamos registrados.
+- **POST** `/api/loans`: Registra un nuevo préstamo.
+- **GET** `/api/loans/:id`: Detalles de un préstamo específico.
+- **PUT** `/api/loans/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
+- **DELETE** `/api/loans/:id`: Elimina un registro de préstamo.
 
 ## Cómo hacer una migración con Prisma
 
