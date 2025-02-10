@@ -1,5 +1,6 @@
 services:
   postgres:
+    container_name: postgres_db
     image: postgres:15
     ports:
       - "127.0.0.1:5432:5432"
@@ -9,6 +10,7 @@ services:
       - ./.volumes/postgres/data:/var/lib/postgresql/data/
 
   frontend:
+    container_name: frontend
     build: ./todo_frontend
     ports:
       - "5500:80"
@@ -17,6 +19,7 @@ services:
       - ./todo_frontend/assets:/usr/local/apache2/htdocs/assets
 
   backend:
+    container_name: backend
     build:
       context: ./todo_backend
     ports:
