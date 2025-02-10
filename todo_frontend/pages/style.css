@@ -1,0 +1,30 @@
+* {
+    background-color: rgb(255, 228, 196);
+}
+
+/* Navbar */
+.navbar {
+    padding: 2rem;
+}
+
+.navbar-collapse {
+    align-self: center;
+    justify-content: space-between;
+}
+
+#title {
+    margin: auto;
+    padding: 2rem;
+    align-content: center;
+}
+
+.card:hover {
+    background-color: black;
+}
+
+/* Responsive */
+@media screen and (max-width: 767px) {
+    .navbar-brand {
+        display: none;
+    }
+}

@@ -1,15 +1,14 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import axios from 'axios';      // Manejo de peticiones http, mas facil
-
+import cors from 'cors';
 
 const app = express()
 const PORT = process.env.BACKEND_PORT ?? 3000;
-
 const prisma = new PrismaClient();
 
 app.use(express.json());
-
+app.use(cors());
 // ------- HOME ---------
 app.get('/', async (req, res) => {
     try {
@@ -26,7 +25,7 @@ app.get('/api/books',  async (req, res) => {
     // Busco listar todo
     const authors = await prisma.author.findMany()
     res.json(authors)
-})
+})  
 
 app.get('/api/books/:id', async (req, res) => {
     // Busco listar solo un libro

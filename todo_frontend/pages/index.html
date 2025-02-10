@@ -1,142 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQlazoo</title>
-    <link rel="icon" href="../assets/icon1.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/style-css/style.css">
+    <meta name="description" content="Library Website">
+    <meta name="keywords" content="HTML,CSS,JavaScript,NodeJS">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <!-- Title -->
+    <title>La Biblioteca de Babel</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- CSS -->
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar -->
-  <div class="container-fluid vh-100 d-flex flex-column">
-    <div class="container">
-      <header class="row py-3 mb-4 border-bottom"> 
-        <div class="col-md-3 mb-2 mb-md-0">
-          <a href="./index.html" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="34" viewBox="0 0 256 274"><path fill="#2b64cf" d="M118.84 2.179c5.083-2.902 13.312-2.909 18.406 0l109.551 71.514C251.88 76.595 256 83.68 256 89.542v93.345c0 5.85-4.109 12.94-9.203 15.848l-109.551 72.55c-5.083 2.902-13.312 2.909-18.406 0L9.203 198.736C4.12 195.833 0 188.75 0 182.887V89.542c0-5.851 4.109-12.94 9.203-15.849z"/><path fill="#fff" d="M143.107 59.955c1.056 0 1.913.857 1.913 1.913V94.28h43.227a8.61 8.61 0 0 1 8.61 8.609l-.002 33.9h5a2.87 2.87 0 0 1 2.869 2.87v28.355a2.87 2.87 0 0 1-2.87 2.87h-4.999l.001 16.984a8.61 8.61 0 0 1-8.609 8.609H68.2a8.61 8.61 0 0 1-8.61-8.61v-16.984h-5.443a2.87 2.87 0 0 1-2.87-2.87v-28.355a2.87 2.87 0 0 1 2.87-2.87h5.443v-33.9a8.61 8.61 0 0 1 8.61-8.608h68.921v-9.113l-15.4.001a1.913 1.913 0 0 1-1.913-1.913V61.868c0-1.056.856-1.913 1.913-1.913zm23.66 74.772l-.036.036l-10.685 10.929a3 3 0 0 1-4.242.048l-.036-.036l-3.657-3.7a3 3 0 0 0-4.267 0l-3.718 3.76a3 3 0 0 0 0 4.219l11.646 11.78a3 3 0 0 0 4.274-.008l18.684-19.038a3 3 0 0 0-.008-4.21l-3.713-3.756a3 3 0 0 0-4.242-.024m-56.657 0l-.036.036l-10.685 10.929a3 3 0 0 1-4.242.048l-.037-.036l-3.657-3.7a3 3 0 0 0-4.267 0l-3.717 3.76a3 3 0 0 0 0 4.219l11.645 11.78a3 3 0 0 0 4.243.024l.032-.032l18.684-19.038a3 3 0 0 0-.008-4.21l-3.713-3.756a3 3 0 0 0-4.242-.024"/></svg>
-          </a>
-        </div>
-        <div class="col-md-6 text-center mb-2 mb-md-0">
-            <h1 class="title">Sistema de Gestión Académica</h1>
-        </div>    
-        <div class="col-md-3 text-end">
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="darkButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" fill="none"/><defs>
-              <symbol id="lineMdCogLoop0"><path d="M15.24 6.37C15.65 6.6 16.04 6.88 16.38 7.2C16.6 7.4 16.8 7.61 16.99 7.83C17.46 8.4 17.85 9.05 18.11 
-              9.77C18.2 10.03 18.28 10.31 18.35 10.59C18.45 11.04 18.5 11.52 18.5 12"><animate fill="freeze" attributeName="d" begin="0.9s" dur="0.2s" 
-              values="M15.24 6.37C15.65 6.6 16.04 6.88 16.38 7.2C16.6 7.4 16.8 7.61 16.99 7.83C17.46 8.4 17.85 9.05 18.11 9.77C18.2 10.03 18.28 10.31 18.35 
-              10.59C18.45 11.04 18.5 11.52 18.5 12;M15.24 6.37C15.65 6.6 16.04 6.88 16.38 7.2C16.38 7.2 19 6.12 19.01 6.14C19.01 6.14 20.57 8.84 20.57 
-              8.84C20.58 8.87 18.35 10.59 18.35 10.59C18.45 11.04 18.5 11.52 18.5 12"/></path></symbol></defs><g fill="none" stroke="#fff" stroke-width="2">
-              <g stroke-linecap="round"><path stroke-dasharray="20" stroke-dashoffset="20" d="M12 9c1.66 0 3 1.34 3 3c0 1.66 -1.34 3 -3 3c-1.66 0 -3 -1.34 
-              -3 -3c0 -1.66 1.34 -3 3 -3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="20;0"/></path>
-              <path stroke-dasharray="48" stroke-dashoffset="48" d="M12 5.5c3.59 0 6.5 2.91 6.5 6.5c0 3.59 -2.91 6.5 -6.5 6.5c-3.59 0 -6.5 
-              -2.91 -6.5 -6.5c0 -3.59 2.91 -6.5 6.5 -6.5Z"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.6s" values="48;0"/>
-              <set fill="freeze" attributeName="opacity" begin="0.9s" to="0"/></path></g><g opacity="0"><use href="#lineMdCogLoop0"/>
-              <use href="#lineMdCogLoop0" transform="rotate(60 12 12)"/><use href="#lineMdCogLoop0" transform="rotate(120 12 12)"/><use href="#lineMdCogLoop0" 
-              transform="rotate(180 12 12)"/><use href="#lineMdCogLoop0" transform="rotate(240 12 12)"/><use href="#lineMdCogLoop0" transform="rotate(300 12 12)"/>
-              <set fill="freeze" attributeName="opacity" begin="0.9s" to="1"/><animateTransform fill="freeze" attributeName="transform" dur="30s" type="rotate" 
-              values="0 12 12;360 12 12"/></g></g>
-              </svg>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-              <li><a class="dropdown-item" href="./Estadisticas.html">Estadisticas</a></li>
-              <li><a class="dropdown-item" href="./Configuraciones.html">Configuraciones</a></li>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar-toggler">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/icon.png" width="50" alt="Website icon">
+            </a>
+            <ul class="navbar-nav d-flex justify-content-center align-items-center">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="books.html">Libros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="loans.html">Préstamos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="authors.html">Autores</a>
+              </li>
             </ul>
           </div>
         </div>
-      </header>
-    </div>
-  <!-- Falta implementar/ hay que revisar si se coloca  o se saca-->
-  <div class="container">
-    <p class="text-white">
-      <span class="me-4">Carrera: <span id="nombreCarrera">Ingenieria en Informatica</span></span>
-      <span class="me-4">Plan de estudios: <span id="planEstudio">2023</span></span>
-      <span>Nombre: <span id="Nombre">-</span></span>
-    </p>
-  </div>
-  <!-- Table -->
-  <div class="container">          <!-- <div class="container py-5">  asi estaba antes -->
-    <div class="table-responsive">
-      <table class="table table-hover table-sm table-dark">
-        <thead>
-          <tr>
-            <th class="text-nowrap">Codigo</th>
-            <th class="text-nowrap">Asignatura</th>
-            <th class="text-nowrap">Condicion</th>
-            <th class="text-nowrap">Creditos</th>
-            <th class="text-nowrap">Notas</th>
-            <th class="text-nowrap">Carga horaria</th>
-            <th class="text-nowrap">Cuatrimestre</th>
-            <th class="text-nowrap">Dificultad</th>
-            <th class="text-nowrap">Requisitos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>
-              <select id="tipoEvaluacion" class="form-select">
-                <option value="aprobado">Aprobado</option>
-                <option value="desaprobado">Desaprobado</option>
-              </select>
-            </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Revisar
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">CODIGO1</a></li>
-                  <li><a class="dropdown-item" href="#">CODIGO2</a></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>
-              <select id="tipoEvaluacion" class="form-select">
-                <option value="aprobado">Aprobado</option>
-                <option value="desaprobado">Desaprobado</option>
-              </select>
-            </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                  Revisar
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                  <li><a class="dropdown-item" href="#">CODIGO1</a></li>
-                  <li><a class="dropdown-item" href="#">CODIGO2</a></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </nav>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h1 class=" display-1 justify-content-center text-center" id="title">Bienvenido a la Biblioteca de Babel</h1>
+                    <p class="lead justify-content-center text-center">Aquí podrás encontrar una infinidad de libros, teóricamente...</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img class="img-fluid mx-auto d-block" src="images/library.png" width="350" alt="Stacked books">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+      <div class="container-fluid w-100" id="book-list">
+        <h1 style="text-align: center; padding-top: 4rem; padding-bottom: 2rem; font-family: 'Courier New', Courier, monospace;">Libros</h1>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4 mb-5" id="books-container">
+              <!-- Las cartas de los libros se generarán aquí dinámicamente -->
+          </div>
+      </div>
+    </section>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Script para cargar los libros -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const booksContainer = document.getElementById("books-container");
+
+    fetch("http://backend:5000/api/books")
+        .then(response => response.json())
+        .then(data => {
+            booksContainer.innerHTML = "";
+            data.forEach(book => {
+                const bookCard = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="libro.html?title=${encodeURIComponent(book.title)}" class="text-decoration-none">
+                                <img src="images/library.png" class="card-img-top" alt="${book.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color:black">${book.title}</h5>
+                                    <p class="card-text ${book.available ? 'text-success' : 'text-danger'}">
+                                        ${book.available ? 'Disponible' : 'En Préstamo'}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                booksContainer.innerHTML += bookCard;
+            });
+        })
+        .catch(error => {
+            console.error("Error al cargar los libros:", error);
+            booksContainer.innerHTML = "<p>Error al cargar los libros. Inténtalo de nuevo más tarde.</p>";
+        });
+});
+    </script>
 </body>
 </html>
-
