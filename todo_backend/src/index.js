@@ -24,29 +24,29 @@ app.get('/', async (req, res) => {
 //  ------- ENDPOINTS --------
 app.get('/api/books',  async (req, res) => {
     // Busco listar todo
-    const authors = await prisma.author.findMany()
-    res.json(authors)
+    const books = await prisma.book.findMany()
+    res.json(books)
 })  
 
 app.get('/api/books/:id', async (req, res) => {
     // Busco listar solo un libro
-    const author = await prisma.author.findUnique({
+    const book = await prisma.book.findUnique({
         where: {
             id: parseInt(req.params.id)
         }
     }) 
-    if (author === null){
+    if (book === null){
         res.sendStatus(404)
         return
     }
-    res.json(author)
+    res.json(book)
 })
 
 app.post('/api/books', async (req, res) =>{
     // Agrega nuevo libro/autore
-    const author = await prisma.author.create({
+    const book = await prisma.book.create({
         data: {
-            author: req.body.author ?? "Anonimo",
+            
             author_id: req.body.author_id,
             availability: req.body.availability ?? "No disponible",
             stock: req.body.stock ?? 0,
@@ -57,7 +57,7 @@ app.post('/api/books', async (req, res) =>{
             loan_price: req.body.loan_price ?? 0,
         }
     })
-    res.status(201).send(author)
+    res.status(201).send(book)
 })
 
 //  COMO AXIOS MANEJA AUTOMATICAMENTE LOS CASOS UNDEFINED, o sea, no los utiliza, realmente
@@ -110,7 +110,25 @@ app.delete('/api/books/:id', async (req, res) => {
     res.send(author); 
 })
 
+//--------ENDPOINTS AUTHORS-------//
+app.post('/api/author', async (req, res) =>{
+    // Agrega nuevo libro/autore
+    const author = await prisma.author.create({
+        data: {
+            name: req.body.name,
+            nationality: req.body.nationality,
+            born_date: req.body.born_date,    
+            biography: req.body.biography,
+            stock_books: req.body.stock_books         
+        }
+    })
+    res.status(201).send(author)
+})
+
+
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
+
 

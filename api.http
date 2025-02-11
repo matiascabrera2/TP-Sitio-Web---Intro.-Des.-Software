@@ -1,0 +1,26 @@
+###
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+
+  "author_id": 68,
+  "availability": "Disponible",
+  "stock": 10,
+  "title": "El Aleph",
+  "publication_date": "1967-05-30T00:00:00.000Z",
+  "genre": "Novela",
+  "language": "Español",
+  "loan_price": 12.50
+}
+###
+POST http://localhost:5000/api/author
+Content-Type: application/json
+
+{
+  "name": "Rolon",
+  "nationality": "Colombiano",
+  "born_date": "1969-08-17T00:00:00.000Z",
+  "biography": "Psicoanalista y escritor",
+  "stock_books": 1
+  }

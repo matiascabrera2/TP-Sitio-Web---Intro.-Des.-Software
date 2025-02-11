@@ -83,28 +83,29 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-        // Fetch API
-        fetch('http://localhost:5000/api/books')
-            .then(response => response.json())
-            .then(books => {
-              console.log(books);
-              books.forEach(book => {
-                let tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td>${book.id}</td>
-                  <td>${book.author}</td>
-                  <td>${book.author_id}</td>
-                  <td>${book.available}</td>
-                  <td>${book.copies}</td>
-                  <td>${book.title}</td>
-                  <td>${book.publication_date}</td>
-                  <td>${book.genre}</td>
-                  <td>${book.language}</td>
-                  <td>${book.loan_price}</td>
-                `;
-                document.querySelector('tbody').appendChild(tr);
-              });
+      // Fetch API
+      fetch('http://localhost:5000/api/books')
+          .then(response => response.json())
+          .then(books => {
+            console.log(books);
+            books.forEach(book => {
+              let tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${book.id}</td>
+                <td>${book.author ? book.author.name : 'Sin autor'}</td>
+                <td>${book.author_id}</td>
+                <td>${book.availability}</td>
+                <td>${book.title}</td>
+                <td>${book.publication_date}</td>
+                <td>${book.genre}</td>
+                <td>${book.language}</td>
+                <td>${book.loan_price}</td>
+              `;
+              document.querySelector('tbody').appendChild(tr);
             });
+          })
+          .catch(error => console.error('Error:', error));
     </script>
+    
 </body>
 </html>
