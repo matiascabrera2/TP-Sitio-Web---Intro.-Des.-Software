@@ -62,7 +62,7 @@ PGDATA=/var/lib/postgresql/data/pgdata  # Ruta de almacenamiento de datos de Pos
 
 # Configuración de Prisma y Base de Datos
 # Ejemplo para la lectura = postrgresql://user:passwordeserver:port/db_name
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/db_sqlazo?schema=public"
+DATABASE_URL="postgresql://postgres:postgres@postgres_db:5432/db_sqlazo?schema=public"
 ```
 Asegúrate de reemplazar los valores por los correspondientes a tu entorno local (DB_USER, DB_PASSWORD, etc).
 
