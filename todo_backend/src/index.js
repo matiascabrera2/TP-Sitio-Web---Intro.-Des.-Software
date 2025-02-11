@@ -46,11 +46,15 @@ app.post('/api/books', async (req, res) =>{
     // Agrega nuevo libro/autore
     const author = await prisma.author.create({
         data: {
-            name: req.body.name,
-            nationality: req.body.nationality,
-            born_date: req.body.born_date,    // ACA TENGO QUE HACERLO CON UN COMANDO SEGURAMENTE 
-            biography: req.body.biography,
-            stock_books: req.body.stock_books
+            author: req.body.author ?? "Anonimo",
+            author_id: req.body.author_id,
+            availability: req.body.availability ?? "No disponible",
+            stock: req.body.stock ?? 0,
+            title: req.body.title ?? "Sin titulo",
+            publication_date: req.body.publication_date ?? "Sin fecha",
+            genre: req.body.genre ?? "Sin genero",
+            language: req.body.language,
+            loan_price: req.body.loan_price ?? 0,
         }
     })
     res.status(201).send(author)
