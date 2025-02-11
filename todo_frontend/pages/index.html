@@ -58,48 +58,53 @@
         </div>
     </section>
     <section>
-      <div class="container-fluid w-100" id="book-list">
-        <h1 style="text-align: center; padding-top: 4rem; padding-bottom: 2rem; font-family: 'Courier New', Courier, monospace;">Libros</h1>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4 mb-5" id="books-container">
-              <!-- Las cartas de los libros se generarán aquí dinámicamente -->
-          </div>
-      </div>
+        <h1 style="text-align: center; padding-top: 4rem; padding-bottom: 2rem; font-family: 'Courier New', Courier, monospace;">Préstamos</h1>
+        <div class="table-responsive">
+        <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Autor Id</th>
+                <th scope="col">Disponibilidad</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Título</th>
+                <th scope="col">Fecha de Publicación</th>
+                <th scope="col">Género</th>
+                <th scope="col">Lenguaje</th>
+                <th scope="col">Precio del Préstamo</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
     </section>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- Script para cargar los libros -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const booksContainer = document.getElementById("books-container");
-
-    fetch("http://backend:5000/api/books")
-        .then(response => response.json())
-        .then(data => {
-            booksContainer.innerHTML = "";
-            data.forEach(book => {
-                const bookCard = `
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="libro.html?title=${encodeURIComponent(book.title)}" class="text-decoration-none">
-                                <img src="images/library.png" class="card-img-top" alt="${book.title}">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="color:black">${book.title}</h5>
-                                    <p class="card-text ${book.available ? 'text-success' : 'text-danger'}">
-                                        ${book.available ? 'Disponible' : 'En Préstamo'}
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                `;
-                booksContainer.innerHTML += bookCard;
+        // Fetch API
+        fetch('http://localhost:5000/books')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.querySelector('tbody');
+                data.forEach(book => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${book.id}</td>
+                        <td>${book.author}</td>
+                        <td>${book.author_id}</td>
+                        <td>${book.available}</td>
+                        <td>${book.quantity}</td>
+                        <td>${book.title}</td>
+                        <td>${book.publication_date}</td>
+                        <td>${book.genre}</td>
+                        <td>${book.language}</td>
+                        <td>${book.loan_price}</td>
+                    `;
+                    table.appendChild(row);
+                });
             });
-        })
-        .catch(error => {
-            console.error("Error al cargar los libros:", error);
-            booksContainer.innerHTML = "<p>Error al cargar los libros. Inténtalo de nuevo más tarde.</p>";
-        });
-});
     </script>
 </body>
 </html>
