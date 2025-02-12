@@ -1,31 +1,22 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import cors from 'cors';
 
-const app = express();
-const PORT = process.env.BACKEND_PORT ?? 3000;
+const router = express.Router();
 const prisma = new PrismaClient();
 
-app.use(express.json());
-app.use(cors());
-app.options('*', cors());
-
-//  ------- ENDPOINTS --------
-app.get('/api/authors', async (req, res) => {
-    // Busco listar todos los autores
+router.get('/', async (req, res) => {
     const authors = await prisma.author.findMany({
-        include: { books: true },       // creo que no lo utilizaremos
+        include: { books: true },
     });
     res.json(authors);
 });
 
-app.get('/api/authors/:id', async (req, res) => {
-    // Busco listar solo un autor
+router.get('/:id', async (req, res) => {
     const author = await prisma.author.findUnique({
         where: {
             id: parseInt(req.params.id),
         },
-        include: { books: true },       // creo que no lo utilizaremos
+        include: { books: true },
     });
     if (author === null) {
         res.sendStatus(404);
@@ -34,13 +25,12 @@ app.get('/api/authors/:id', async (req, res) => {
     res.json(author);
 });
 
-app.post('/api/authors', async (req, res) => {
-    // Crea nuevo autor
+router.post('/', async (req, res) => {
     const author = await prisma.author.create({
         data: {
             name: req.body.name ?? 'Desconocido',
             nationality: req.body.nationality ?? 'Desconocida',
-            born_date: req.body.born_date ?? new Date(),   // hay que cambiarlo luego
+            born_date: req.body.born_date ?? '2000-01-01T00:00:00Z',
             biography: req.body.biography ?? 'Sin información',
             stock_books: req.body.stock_books ?? 0,
         },
@@ -48,8 +38,7 @@ app.post('/api/authors', async (req, res) => {
     res.status(201).json(author);
 });
 
-app.patch('/api/authors/:id', async (req, res) => {
-    // Actualiza un autor por medio del ID
+router.patch('/:id', async (req, res) => {
     let author = await prisma.author.findUnique({
         where: {
             id: parseInt(req.params.id),
@@ -76,8 +65,7 @@ app.patch('/api/authors/:id', async (req, res) => {
     res.json(author);
 });
 
-app.delete('/api/authors/:id', async (req, res) => {
-    // Borra un autor en especifico
+router.delete('/:id', async (req, res) => {
     const author = await prisma.author.findUnique({
         where: {
             id: parseInt(req.params.id),
@@ -97,6 +85,4 @@ app.delete('/api/authors/:id', async (req, res) => {
     res.json(author);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+export default router;
