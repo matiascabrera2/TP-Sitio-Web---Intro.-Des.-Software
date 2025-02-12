@@ -127,21 +127,21 @@ La documentación de la API generada por Postman aun no esta disponible. Por aho
 - **GET** `/api/books`: Obtiene la lista de todos los libros.
 - **POST** `/api/books`: Agrega un nuevo libro.
 - **GET** `/api/books/:id`: Obtiene los detalles de un libro por su ID.
-- **PUT** `/api/books/:id`: Modifica los datos de un libro existente.
+- **PATCH** `/api/books/:id`: Modifica los datos de un libro existente.
 - **DELETE** `/api/books/:id`: Elimina un libro.
 
 ### 2. Autores (/api/autores)
 - **GET** `/api/authors`: Lista todos los autores.
 - **POST** `/api/authors`: Agrega un nuevo autor.
 - **GET** `/api/authors/:id`: Obtiene información de un autor específico.
-- **PUT** `/api/authors/:id`: Modifica los datos de un autor existente.
+- **PATCH** `/api/authors/:id`: Modifica los datos de un autor existente.
 - **DELETE** `/api/authors/:id`: Elimina un autor.
 
 ### 3. Préstamos (/api/prestamos)
 - **GET** `/api/loans`: Lista todos los préstamos registrados.
 - **POST** `/api/loans`: Registra un nuevo préstamo.
 - **GET** `/api/loans/:id`: Detalles de un préstamo específico.
-- **PUT** `/api/loans/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
+- **PATCH** `/api/loans/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
 - **DELETE** `/api/loans/:id`: Elimina un registro de préstamo.
 
 ## Cómo hacer una migración con Prisma
