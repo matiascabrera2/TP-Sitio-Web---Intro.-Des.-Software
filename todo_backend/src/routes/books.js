@@ -23,19 +23,28 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const book = await prisma.book.create({
-        data: {
-            author_id: req.body.author_id,
-            availability: req.body.availability ?? "No disponible",
-            stock: req.body.stock ?? 0,
-            title: req.body.title ?? "Sin titulo",
-            publication_date: req.body.publication_date ?? "Sin fecha",
-            genre: req.body.genre ?? "Sin genero",
-            language: req.body.language,
-            loan_price: req.body.loan_price ?? 0,
-        },
-    });
-    res.status(201).json(book);
+    try {
+        const book = await prisma.book.create({
+            data: {
+                author_id: req.body.author_id,
+                availability: req.body.availability ?? "No disponible",
+                stock: req.body.stock ?? 0,
+                title: req.body.title ?? "Sin título",
+                publication_date: req.body.publication_date ? new Date(req.body.publication_date) : new Date(),
+                genre: req.body.genre ?? "Sin género",
+                language: req.body.language ?? "Desconocido",
+                loan_price: req.body.loan_price ?? 0,
+            },
+            include: {
+                author: true, // Esto traerá los datos del autor al devolver el libro
+            }
+        });
+
+        res.status(201).json(book);
+    } catch (error) {
+        console.error('Error creating book:', error);
+        res.status(500).json({ error: 'Error al crear el libro' });
+    }
 });
 
 router.patch('/:id', async (req, res) => {
