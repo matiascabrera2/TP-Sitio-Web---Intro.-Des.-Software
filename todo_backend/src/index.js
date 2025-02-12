@@ -15,7 +15,7 @@ app.get('/api/books',  async (req, res) => {
     // Busco listar todos los libros
     const books = await prisma.book.findMany()
     res.json(books)
-})  
+})
 
 app.get('/api/books/:id', async (req, res) => {
     // Busco listar solo un libro

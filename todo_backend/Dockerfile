@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:14
 
 # Limpia el cache npm para por posibles problemas de dependencias corruptas
 RUN npm cache clean --force
