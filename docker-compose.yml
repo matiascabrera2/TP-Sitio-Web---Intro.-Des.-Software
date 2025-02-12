@@ -17,6 +17,7 @@ services:
     volumes:    # Permite mostrar los cambios del front, sin necesidad de reiniciar el container
       - ./todo_frontend/pages:/usr/local/apache2/htdocs    
       - ./todo_frontend/assets:/usr/local/apache2/htdocs/assets
+      - ./todo_frontend/images:/usr/local/apache2/htdocs/images
 
   backend:
     container_name: backend
