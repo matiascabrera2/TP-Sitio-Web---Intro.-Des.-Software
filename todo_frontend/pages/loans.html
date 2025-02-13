@@ -156,7 +156,7 @@
             const loans= btn.dataset.id;
             // Redirige a un formulario de edición,
             // o haz un fetch GET para traer los datos y mostrarlos en un modal
-            window.location.href = "http://localhost:5000/api/loans/:id";
+            window.location.href = `form_loans.html?id=${id}`;
           });
         });
       });

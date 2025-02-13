@@ -2,4 +2,4 @@
 .env
 todo_backend/src/node_modules/
 todo_backend/database
-.api.http
+api.http
