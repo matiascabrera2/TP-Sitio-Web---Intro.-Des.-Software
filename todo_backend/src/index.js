@@ -17,6 +17,11 @@ app.use('/api/books', booksRouter);
 app.use('/api/authors', authorsRouter);
 app.use('/api/loans', loansRouter); // Usar las rutas de préstamos
 
+app.get('/', (req, res) => {
+    res.send('Funca :)');
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
