@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         data: {
             name: req.body.name ?? 'Desconocido',
             nationality: req.body.nationality ?? 'Desconocida',
-            born_date: req.body.born_date ?? '2000-01-01T00:00:00Z',
+            born_date: req.body.born_date ?? 'Sin fecha',
             biography: req.body.biography ?? 'Sin información',
             stock_books: req.body.stock_books ?? 0,
         },

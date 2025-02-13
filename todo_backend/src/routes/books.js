@@ -19,43 +19,58 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.get('/:id', async (req, res) => {
-    const book = await prisma.book.findUnique({
-        where: {
-            id: parseInt(req.params.id),
-        },
-    });
-    if (book === null) {
-        res.sendStatus(404);
-        return;
+  router.get('/:id', async (req, res) => {
+    // Extrae y convierte el id a número
+    const id = parseInt(req.params.id, 10);
+  
+    // Verifica si el id es válido
+    if (!id) {
+      return res.status(400).json({ error: 'ID no válido' });
     }
-    res.json(book);
-});
+  
+    try {
+      const book = await prisma.book.findUnique({
+        where: { id: id }
+      });
+  
+      if (!book) {
+        return res.status(404).json({ error: 'Libro no encontrado' });
+      }
+      res.json(book);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  });
 
 router.post('/', async (req, res) => {
     try {
-        const book = await prisma.book.create({
-            data: {
-                author_id,
-                availability,
-                stock,
-                title,
-                publication_date,
-                genre,
-                language,
-                // Prisma Decimal puede recibir un número o un string
-                loan_price: loan_price 
-              },
-            include: {
-                author: true, // Esto traerá los datos del autor al devolver el libro
-            }
-        });
-        res.status(201).json(book);
+      // Desestructuramos los valores del body
+      const { author_id, availability, stock, title, publication_date, genre, language, loan_price } = req.body;
+      
+      const book = await prisma.book.create({
+        data: {
+          author_id: parseInt(author_id, 10),
+          availability: availability ?? "No disponible",
+          stock: stock ?? 0,
+          title: title ?? "Sin título",
+          publication_date: "Sin fecha",
+          genre: genre ?? "Sin género",
+          language: language ?? "Desconocido",
+          loan_price: loan_price ?? 0,
+        },
+        include: {
+          author: true, // Incluye los datos del autor en la respuesta
+        }
+      });
+  
+      res.status(201).json(book);
     } catch (error) {
-        console.error('Error creating book:', error);
-        res.status(500).json({ error: 'Error al crear el libro' });
+      console.error('Error creating book:', error);
+      res.status(500).json({ error: 'Error al crear el libro' });
     }
-});
+  });
+  
 
 router.patch('/:id', async (req, res) => {
     let book = await prisma.book.findUnique({

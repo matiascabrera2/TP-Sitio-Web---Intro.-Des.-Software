@@ -35,8 +35,8 @@ router.post('/', async (req, res) => {
             book_id: req.body.book_id,
             price: req.body.price ?? 0,
             reader: req.body.reader ?? 'Desconocido',
-            loan_date: req.body.loan_date ?? new Date(),
-            return_date: req.body.return_date ?? new Date(),
+            loan_date: req.body.loan_date ?? "Sin fecha",
+            return_date: req.body.return_date ?? "Sin fecha",
         },
     });
     res.status(201).json(loan);
