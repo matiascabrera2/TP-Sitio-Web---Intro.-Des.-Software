@@ -60,31 +60,39 @@
   </nav>
 
   <!-- Sección de la Tabla de Préstamos -->
-  <section>
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-center" style="font-family: 'Courier New', Courier, monospace;">Tabla de Prestamos</h1>
+<section class="loans-section">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <h1 style="font-family: 'Courier New', Courier, monospace;">Tabla de Prestamos</h1>
         <!-- Botón para crear un nuevo prestamo -->
         <a href="create_loans.html" class="btn btn-success">Nuevo Prestamo</a>
-    <div class="table-responsive">
-      <table class="table">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Libro</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Lector</th>
-            <th scope="col">Fecha de Préstamo</th>
-            <th scope="col">Fecha de Devolución</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="loansTable">
-          <!-- Aquí se inyectarán las filas -->
-        </tbody>
-      </table>
+      </div>
     </div>
-  </section>
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Libro</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Lector</th>
+                <th scope="col">Fecha de Préstamo</th>
+                <th scope="col">Fecha de Devolución</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="loansTable">
+              <!-- Aquí se inyectarán las filas -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -127,7 +135,7 @@
         if (event.target.classList.contains("btn-edit")) {
           const id = event.target.dataset.id;
           // Redirige a la ventana de edición de préstamos
-          window.location.href = `form_loans.html?id=${id}`;
+          window.location.href = `edit_loans.html?id=${id}`;
         }
         if (event.target.classList.contains("btn-delete")) {
           const id = event.target.dataset.id;

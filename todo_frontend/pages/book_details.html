@@ -165,9 +165,12 @@
             
             // Función para mostrar los detalles del libro
             function displayBookDetails(book) {
+                const authorName = book.author ? (book.author.name || book.author) : 'Desconocido';
+                console.log('Nombre del autor a mostrar:', authorName);
+
                 document.getElementById('book-title').textContent = book.title;
                 // Se muestra el nombre del autor (usando optional chaining)
-                document.getElementById('book-author').textContent = book.author?.name || 'Desconocido';
+                document.getElementById('book-author').textContent = authorName;
                 document.getElementById('book-genre').textContent = book.genre;
                 document.getElementById('book-language').textContent = book.language;
                 document.getElementById('book-publication-date').textContent = book.publication_date;

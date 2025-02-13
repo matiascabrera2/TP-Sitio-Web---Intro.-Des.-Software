@@ -47,10 +47,6 @@
         <label for="createBookLanguage" class="form-label">Idioma</label>
         <input type="text" class="form-control" id="createBookLanguage" name="language" required>
       </div>
-      <div class="mb-3">
-        <label for="createBookLoanPrice" class="form-label">Precio del Préstamo</label>
-        <input type="number" step="0.01" class="form-control" id="createBookLoanPrice" name="loan_price" required>
-      </div>
       <button type="submit" class="btn btn-primary">Crear Libro</button>
     </form>
   </div>
@@ -66,7 +62,6 @@
         publication_date: document.getElementById('createBookPublicationDate').value,
         genre: document.getElementById('createBookGenre').value,
         language: document.getElementById('createBookLanguage').value,
-        loan_price: parseFloat(document.getElementById('createBookLoanPrice').value)
       };
 
       fetch('http://localhost:5000/api/books', {

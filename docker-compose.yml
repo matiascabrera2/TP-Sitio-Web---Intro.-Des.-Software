@@ -8,6 +8,8 @@ services:
       - ./.env 
     volumes:
       - ./.volumes/postgres/data:/var/lib/postgresql/data/
+      - ./todo_backend/database:/docker-entrypoint-initdb.d
+
 
   frontend:
     container_name: frontend

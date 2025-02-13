@@ -78,7 +78,6 @@
               <th scope="col">Idioma</th>
               <th scope="col">Fecha de Publicación</th>
               <th scope="col">Disponibilidad</th>
-              <th scope="col">Precio del Préstamo</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
@@ -116,7 +115,6 @@
               <td>${book.language}</td>
               <td>${book.publication_date}</td>
               <td>${book.stock > 0 ? 'Disponible' : 'No disponible'}</td>
-              <td>$${book.loan_price}</td>
               <td>
                 <button class="btn btn-edit btn-sm me-1" data-id="${book.id}">Editar</button>
                 <button class="btn btn-delete btn-sm" data-id="${book.id}">Eliminar</button>
@@ -133,7 +131,7 @@
         if (event.target.classList.contains('btn-edit')) {
           const id = event.target.dataset.id;
           // Redirige a la ventana de edición para libros (por ejemplo, form_books.html)
-          window.location.href = `form_books.html?id=${id}`;
+          window.location.href = `edit_books.html?id=${id}`;
         }
 
         // Si se hizo click en un botón de eliminar
@@ -153,7 +151,7 @@
             })
             .catch(error => {
               console.error("Error:", error);
-              alert("Error al eliminar el registro, puede que otras entidades dependan de este");
+              alert("Error al eliminar el registro");
             });
           }
         }

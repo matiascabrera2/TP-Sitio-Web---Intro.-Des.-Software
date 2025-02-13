@@ -30,7 +30,8 @@ router.get('/', async (req, res) => {
   
     try {
       const book = await prisma.book.findUnique({
-        where: { id: id }
+        where: { id: id },
+        include: { author: true }
       });
   
       if (!book) {
@@ -57,7 +58,6 @@ router.post('/', async (req, res) => {
           publication_date: "Sin fecha",
           genre: genre ?? "Sin género",
           language: language ?? "Desconocido",
-          loan_price: loan_price ?? 0,
         },
         include: {
           author: true, // Incluye los datos del autor en la respuesta
@@ -95,7 +95,6 @@ router.patch('/:id', async (req, res) => {
             publication_date: req.body.publication_date,
             genre: req.body.genre,
             language: req.body.language,
-            loan_price: req.body.loan_price,
         },
     });
 

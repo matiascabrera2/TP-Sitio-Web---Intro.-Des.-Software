@@ -17,7 +17,7 @@ model Author {
 
   books Book[] // representa todos los libros que pertenecen a un autor
 
-  // @@map("autor") // Mapea Author con la tabla "autor" --- USAR EN CASO DE SER NECESARIO
+  @@map("Author") // Mapea Author con la tabla "autor" --- USAR EN CASO DE SER NECESARIO
 }
 
 model Book {
@@ -30,11 +30,10 @@ model Book {
   publication_date String
   genre            String
   language         String
-  loan_price       Decimal
 
   loans Loans[] // relacion de un libro que puede ser prestado varias veces segun el stock
 
-  // @@map("libro") // Mapea el Book con la tabla "libro"  --- USAR EN CASO DE SER NECESARIO
+  @@map("Book") // Mapea el Book con la tabla "libro"  --- USAR EN CASO DE SER NECESARIO
 }
 
 model Loans {
@@ -46,7 +45,7 @@ model Loans {
   loan_date   String
   return_date String
 
-  // @@map("prestamos") // Mapea el Loan con la tabla "prestamos"  --- USAR EN CASO DE SER NECESARIO
+  @@map("Loans") // Mapea el Loan con la tabla "prestamos"  --- USAR EN CASO DE SER NECESARIO
 }
 
 // Para hacer migraciones para efectuar cambios:
