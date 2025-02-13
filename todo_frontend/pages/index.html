@@ -22,6 +22,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             overflow: hidden;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
         }
         .card:hover {
             transform: scale(1.05);
@@ -134,14 +135,14 @@
                     card.className = 'col-md-4 mb-4';
 
                     card.innerHTML = `
-                        <div class="card">
+                        <div class="card" data-book-id="${book.id}">
                             <img src="images/icon.png" class="card-img-top" alt="${book.title}">
                             <div class="card-body">
                                 <h5 class="card-title">${book.title}</h5>
                                 <p class="card-text"><strong>Autor:</strong> ${book.author}</p>
                                 <p class="card-text"><strong>Género:</strong> ${book.genre}</p>
                                 <p class="card-text"><strong>Idioma:</strong> ${book.language}</p>
-                                <p class="card-text"><strong>Fecha de Publicación:</strong> ${new Date(book.publication_date).toLocaleDateString()}</p>
+                                <p class="card-text"><strong>Fecha de Publicación:</strong> ${book.publication_date}</p>
                                 <p class="card-text"><strong>Disponibilidad:</strong> 
                                     <span class="${book.stock > 0 ? 'availability' : 'no-availability'}">
                                         ${book.stock > 0 ? 'Disponible' : 'No disponible'}
@@ -151,6 +152,11 @@
                             </div>
                         </div>
                     `;
+
+                    // Agregar evento de clic a la tarjeta
+                    card.querySelector('.card').addEventListener('click', () => {
+                        window.location.href = `book_details.html?book_id=${book.id}`;
+                    });
 
                     booksContainer.appendChild(card);
                 });
