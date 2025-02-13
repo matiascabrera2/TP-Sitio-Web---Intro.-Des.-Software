@@ -162,21 +162,22 @@
                     console.error('Error fetching book details:', error);
                 }
             }
-
+            
             // Función para mostrar los detalles del libro
             function displayBookDetails(book) {
                 document.getElementById('book-title').textContent = book.title;
-                document.getElementById('book-author').textContent = book.author;
+                // Se muestra el nombre del autor (usando optional chaining)
+                document.getElementById('book-author').textContent = book.author?.name || 'Desconocido';
                 document.getElementById('book-genre').textContent = book.genre;
                 document.getElementById('book-language').textContent = book.language;
-                document.getElementById('book-publication-date').textContent = new Date(book.publication_date).toLocaleDateString();
+                document.getElementById('book-publication-date').textContent = book.publication_date;
                 document.getElementById('book-availability').textContent = book.stock > 0 ? 'Disponible' : 'No disponible';
                 document.getElementById('book-availability').className = book.stock > 0 ? 'availability' : 'no-availability';
                 document.getElementById('book-loan-price').textContent = book.loan_price;
                 document.getElementById('book-cover').src = book.cover_image || 'images/icon.png';
             }
 
-            // Función para actualizar el estado del botón de préstamo
+            // Función para actualizar el estado del botón de préstamo (si lo deseas usar en otro momento)
             function updateLoanButton(stock) {
                 const loanButton = document.getElementById('loan-button');
                 if (stock > 0) {

@@ -14,11 +14,28 @@
     <!-- CSS -->
     <link href="./assets/style.css" rel="stylesheet">
     <style>
-        .table-responsive { margin: 0 5%; }
-        .btn-edit { background-color: #007bff; border: none; color: white; }
-        .btn-edit:hover { background-color: #0056b3; }
-        .btn-delete { background-color: #dc3545; border: none; color: white; }
-        .btn-delete:hover { background-color: #c82333; }
+        /* Ajuste del margen lateral */
+        .table-responsive {
+            margin: 0 5%;
+        }
+        /* Botón de editar */
+        .btn-edit {
+            background-color: #007bff; /* Azul */
+            border: none;
+            color: white;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+        /* Botón de eliminar */
+        .btn-delete {
+            background-color: #dc3545; /* Rojo */
+            border: none;
+            color: white;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +75,7 @@
                 <th scope="col">Género</th>
                 <th scope="col">Lenguaje</th>
                 <th scope="col">Precio del Préstamo</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody id="booksTable">
@@ -88,10 +106,14 @@
                             <td>${book.availability}</td>
                             <td>${book.stock ?? "Sin datos"}</td>
                             <td>${book.title}</td>
-                            <td>${book.publication_date ? new Date(book.publication_date).toLocaleDateString() : "Sin fecha"}</td>
+                            <td>${book.publication_date}</td>
                             <td>${book.genre}</td>
                             <td>${book.language}</td>
-                            <td>${book.loan_price}</td>
+                            <td>$${book.loan_price}</td>
+                            <td>
+                              <button class="btn btn-edit btn-sm me-1" data-id="${book.id}">Editar</button>
+                              <button class="btn btn-delete btn-sm" data-id="${book.id}">Eliminar</button> 
+                            </td>
                         `;
                         tableBody.appendChild(row);
                     });
