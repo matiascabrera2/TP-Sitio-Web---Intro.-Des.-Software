@@ -1,176 +1,67 @@
-# Backend del Proyecto: Mi biblioteca virtual
+# Biblioteca de Babel - Frontend
 
-Este proyecto implementa un sistema de gestión de libros, autores y préstamos a través de una API REST. El backend proporciona operaciones CRUD completas para gestionar estas entidades y facilita la comunicación con el frontend.
-Se divide en tres páginas principales: `NOMBRE 1.html`, `NOMBRE 2.html` y `NOMBRE 3.html`. Cada una tiene una función específica dentro del flujo del sistema.
-El backend está construido en **JavaScript** utilizando el servicio de **Nodemon** para ejecutar el código fuera del navegador. Sirve como intermediario entre el frontend y la base de datos, gestionando solicitudes y respuestas. Todo el entorno se ejecuta dentro de un contenedor Docker, simplificando el proceso de instalación y despliegue.
+Hola! este el apartado del Front de  "Biblioteca de Babel", una aplicación web para la gestión de libros, autores y préstamos.
 
 ## Tecnologías utilizadas
 
-- **Frontend:** HTML, CSS, JavaScript.
-- **Backend:** Node.js con Nodemon.
-- **Framework:** Express.js
-- **ORM:** Prisma
-- **Base de datos:** PostgreSQL --- pgadmin4
-- **Contenedor:** Docker para la configuración y despliegue del entorno.
-- **API Testing y Documentación:** Postman
+- **HTML**
+- **CSS**
+- **Bootstrap**
 
-## Cómo cumple los requisitos:  --- REVISAR SI SE DEJA O NO
-- Libro: (id, título, portada, año_publicación, género, etc.)
-- Autor: (id, nombre, nacionalidad, fecha_nacimiento, bio, etc.)
-- Préstamo: (id, libro_id, fecha_prestamo, fecha_devolucion, lector, estado)
-- Préstamo tiene un foreign key a Libro.
+## Descripción
 
-### API REST Backend:
-- Rutas: /api/libros, /api/autores, /api/prestamos. CRUD completo sobre libros, autores y préstamos.
+El frontend está compuesto HTML estaticos que consumen una API REST para obtener, crear, editar y eliminar información sobre libros, autores y préstamos, un CRUD, se utiliza DOM para acceder al cuerpo del html.
 
-### Frontend (3 páginas):
-- Página 1 (Catálogo): Muestra los libros con portada, título, autor.
-- Página 2 (Detalles del Libro): Despliega información completa del libro, su autor, y permite solicitar un préstamo.
-- Página 3 (Administración): Añadir nuevos libros, autores, y gestionar préstamos.
+### Páginas principales HTML
 
+- **index**: Página de inicio, muestra lis libros cargados
+- **books**: Lista de libros disponibles.
+- **authors**: Muestra los autores registrados.
+- **loans**: Gestión de préstamos.
+- **book_details**: Detalles de un libro específicoa, ingresado atravez de `index`.
 
-## Instalación y configuración
+### Paginas Auxiliares que ayudan al CRUD de cada pagina, en formato HTML
+Cada entidad cuenta con sus respectivas páginas para la gestión:
+- **Books**: `create_books`, `edit_books`.
+- **Authors**: `create_authors`, `edit_authors`.
+- **Loans**: `create_loans`, `edit_loans`.
 
-### 1. Clonar el repositorio
-```bash
-git clone git@github.com:matiascabrera2/TP-Sitio-Web---Intro.-Des.-Software.git
-```
-```bash
-cd TP-Sitio-Web---Intro.-Des.-Software.git
-```
+## Endpoints Consumidos
 
-### 2. Configurar variables de entorno
-En caso de no tenerlo, crea un archivo `.env` en la raíz del proyecto (si no se creó automáticamente al instalar Prisma) 
-con las siguientes variables:
+El frontend realiza peticiones a los siguientes endpoints de la API:
 
-```bash
-# Configuracion del Frontend
-FRONTEND_PORT=5500
-
-# Configuración del Backend
-BACKEND_PORT=5000
-
-# Configuración de la Base de Datos
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_DB=db_sqlazo
-
-# Variables de conexión predeterminadas para DB
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-PGDATA=/var/lib/postgresql/data/pgdata  # Ruta de almacenamiento de datos de PostgreSQL
-
-# Configuración de Prisma y Base de Datos
-# Ejemplo para la lectura = postrgresql://user:passwordeserver:port/db_name
-DATABASE_URL="postgresql://postgres:postgres@postgres_db:5432/db_sqlazo?schema=public"
-```
-Asegúrate de reemplazar los valores por los correspondientes a tu entorno local (DB_USER, DB_PASSWORD, etc).
-
-En caso de tener problemas de autenticación con PostgreSQL, revisa la configuración de autenticación en el archivo `pg_hba.conf` y asegúrate de que esté habilitada la autenticación `md5` para las conexiones locales:
-```bash
-# Línea de ejemplo para habilitar MD5
-host    all             all             127.0.0.1/32            md5
-```
-
-### 3. Ejecutar el servidor
-1. Asegurarse de tener Docker y Docker Compose instalados.
-    Si aún no tienes Docker y Docker Compose instalados en `Linux`, haz lo siguientes pasos:
-    - Para instalar Docker:
-```bash
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo systemctl enable docker
-sudo systemctl start docker
-```
-
-- OPCIONAL --- Si deseas ejecutar Docker sin usar sudo cada vez, puedes agregar tu usuario al grupo Docker:
-```bash
-sudo usermod -aG docker $USER
-```
-    - Para instalar Docker-compose:
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
-2. Ejecutar el siguiente comando en la raíz del proyecto:
-```bash
-docker-compose down --volumes
-docker-compose up --build
-```
-3. El backend estará disponible en lo especificado en `docker-compose.yml`.
-    - En general, se encontrará en `http://localhost:5000`.
-
-- OPCIONAL --- Si deseas limpiar todo Docker y liberar espacio en memoria:
-```bash
-#Si deseas ver cuanto espacio liberal antes de ejecutar el comando
-docker system df
-```
-```bash
-docker system prune -a --volumes
-```
-## Pruebas
-
-Puedes probar la API usando herramientas como Postman o cURL. 
-- Ejemplo para listar los libros:
-
-```bash
-curl http://localhost:5000/api/books
-```
-- En caso de usar postman, utiliza la solicitud correspondiente.
-La documentación de la API generada por Postman aun no esta disponible. Por ahora, puedes probar la API usando curl o postman con la direcciones aclaradas en la seccion `Rutas de la API`.
-
-## Rutas de la API --- DE MOMENTO ESTO ES UN ESBOZO
-
-### 1. Libros (/api/libros)
+### Libros (/api/books)
 - **GET** `/api/books`: Obtiene la lista de todos los libros.
 - **POST** `/api/books`: Agrega un nuevo libro.
-- **GET** `/api/books/:id`: Obtiene los detalles de un libro por su ID.
-- **PATCH** `/api/books/:id`: Modifica los datos de un libro existente.
+- **GET** `/api/books/:id`: Obtiene los detalles de un libro.
+- **PATCH** `/api/books/:id`: Modifica un libro existente.
 - **DELETE** `/api/books/:id`: Elimina un libro.
 
-### 2. Autores (/api/autores)
+### Autores (/api/authors)
 - **GET** `/api/authors`: Lista todos los autores.
 - **POST** `/api/authors`: Agrega un nuevo autor.
-- **GET** `/api/authors/:id`: Obtiene información de un autor específico.
-- **PATCH** `/api/authors/:id`: Modifica los datos de un autor existente.
+- **GET** `/api/authors/:id`: Obtiene información de un autor.
+- **PATCH** `/api/authors/:id`: Modifica un autor existente.
 - **DELETE** `/api/authors/:id`: Elimina un autor.
 
-### 3. Préstamos (/api/prestamos)
+### Préstamos (/api/loans)
 - **GET** `/api/loans`: Lista todos los préstamos registrados.
 - **POST** `/api/loans`: Registra un nuevo préstamo.
 - **GET** `/api/loans/:id`: Detalles de un préstamo específico.
-- **PATCH** `/api/loans/:id`: Actualiza información de un préstamo (estado, fecha de devolución, etc.).
+- **PATCH** `/api/loans/:id`: Actualiza información de un préstamo.
 - **DELETE** `/api/loans/:id`: Elimina un registro de préstamo.
 
-## Cómo hacer una migración con Prisma
+## Despliegue con GitHub Pages
 
-**Aclaración importante:** Es importante estar posicionado en el directorio de prisma para hacer estos comandos, por que de otra manera podria dar errores innesperados.
+Este apartado esta configurado con  **GitHub Pages** para desplegar con le herramienta de **GitHub Actions**. El workflow se encuentra en `.github/workflows/deploy.yml` y se activa al hacer un push a la rama `main`.
 
-Afortunadamente, Prisma ya está configurado para cargar las variables de entorno necesarias, por lo que puedes realizar migraciones fácilmente.
+## Uso y Despliegue
 
-#### 1. **Pruebas rapidas sin configuraciones adicionales (sin dotenv-cli):**
+- **Base de datos:** Se utilizó **Supabase**, vinculada a la cuenta `ArielRepo`.
+- **Backend:** Desplegado con **Render**, utilizando el Dockerfile desarrollado en `./todo_backend`.
+  - 🔗 (https://despligue-backend-12225.onrender.com)
+- **Frontend:** Desplegado con **GitHub Actions** en GitHub Pages.
+  - 🔗 (https://arielrepo.github.io/despligue-backend-12225/)
 
-Si aún no has configurado las variables de entorno, primero exporta la variable `DATABASE_URL` y luego crea la migración:
-
-```bash
-export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/db_sqlazo?schema=public"
-npx prisma migrate dev --name initial-schema
-```
-Esto creará la migración inicial y la aplicará a la base de datos.
-
-#### 2. **Para configurar y tenerlo preparado (con script/dotenv-cli):**
-En package.json deberias de tener algo como esto:
-
-```json
-  "scripts": {
-    "migrate": "dotenv -e ./../../.env -- npx prisma migrate dev --name"
-  }
-```
-Este script buscará el archivo .env en la carpeta raíz del proyecto. En caso de tenerlo de esta manera, simplemente ejecuta el siguiente comando para la migracion:
-
-```bash
-npm run migrate -- migration-name
-```
-Donde `migration-name` es el nombre de la migración que elijas.
+`
+---
