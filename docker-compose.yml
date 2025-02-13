@@ -16,8 +16,8 @@ services:
       - "5500:80"
     volumes:    # Permite mostrar los cambios del front, sin necesidad de reiniciar el container
       - ./todo_frontend/pages:/usr/local/apache2/htdocs    
-      - ./todo_frontend/assets:/usr/local/apache2/htdocs/assets
-      - ./todo_frontend/images:/usr/local/apache2/htdocs/images
+      - ./todo_frontend/pages/assets:/usr/local/apache2/htdocs/assets
+      - ./todo_frontend/pages/images:/usr/local/apache2/htdocs/images
 
   backend:
     container_name: backend

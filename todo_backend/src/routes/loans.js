@@ -1,31 +1,25 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import cors from 'cors';
 
-const app = express();
-const PORT = process.env.BACKEND_PORT ?? 3000;
+const router = express.Router();
 const prisma = new PrismaClient();
 
-app.use(express.json());
-app.use(cors());
-app.options('*', cors());
-
 //  ------- ENDPOINTS --------
-app.get('/api/loans', async (req, res) => {
-    // Busco listar todos los prestamos
+router.get('/', async (req, res) => {
+    // Busco listar todos los préstamos
     const loans = await prisma.loans.findMany({
-        include: { book: true },        // creo que no lo utilizaremos
+        include: { book: true }, // Incluir datos del libro (opcional)
     });
     res.json(loans);
 });
 
-app.get('/api/loans/:id', async (req, res) => {
-    // Busco listar solo un prestamo
+router.get('/:id', async (req, res) => {
+    // Busco listar solo un préstamo
     const loan = await prisma.loans.findUnique({
         where: {
             id: parseInt(req.params.id),
         },
-        include: { book: true },        // creo que no lo utilizaremos
+        include: { book: true }, // Incluir datos del libro (opcional)
     });
     if (loan === null) {
         res.sendStatus(404);
@@ -34,8 +28,8 @@ app.get('/api/loans/:id', async (req, res) => {
     res.json(loan);
 });
 
-app.post('/api/loans', async (req, res) => {
-    // Crea nuevo prestamo
+router.post('/', async (req, res) => {
+    // Crea nuevo préstamo
     const loan = await prisma.loans.create({
         data: {
             book_id: req.body.book_id,
@@ -48,8 +42,8 @@ app.post('/api/loans', async (req, res) => {
     res.status(201).json(loan);
 });
 
-app.patch('/api/loans/:id', async (req, res) => {
-    // Actualiza un prestamo por medio del ID
+router.patch('/:id', async (req, res) => {
+    // Actualiza un préstamo por medio del ID
     let loan = await prisma.loans.findUnique({
         where: {
             id: parseInt(req.params.id),
@@ -76,8 +70,8 @@ app.patch('/api/loans/:id', async (req, res) => {
     res.json(loan);
 });
 
-app.delete('/api/loans/:id', async (req, res) => {
-    // Borra un autor en especifico
+router.delete('/:id', async (req, res) => {
+    // Borra un préstamo en específico
     const loan = await prisma.loans.findUnique({
         where: {
             id: parseInt(req.params.id),
@@ -97,6 +91,4 @@ app.delete('/api/loans/:id', async (req, res) => {
     res.json(loan);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+export default router;
