@@ -66,23 +66,28 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const author = await prisma.author.findUnique({
-        where: {
-            id: parseInt(req.params.id),
-        },
-    });
-    if (author === null) {
-        res.sendStatus(404);
-        return;
+    try {
+      const authorId = parseInt(req.params.id);
+      const author = await prisma.author.findUnique({
+        where: { id: authorId },
+      });
+      if (!author) {
+        return res.sendStatus(404);
+      }
+      
+      await prisma.author.delete({
+        where: { id: authorId },
+      });
+      
+      res.json(author);
+    } catch (error) {
+      console.error("Error al eliminar el autor :", error);
+      // Devuelve un status 400 y un mensaje de error que indique que no se puede eliminar el registro
+      res.status(400).json({
+        error: "No se puede eliminar ese registro, porque de ese registro depende algún préstamo o algún libro"
+      });
     }
-
-    await prisma.author.delete({
-        where: {
-            id: author.id,
-        },
-    });
-
-    res.json(author);
-});
+  });
+  
 
 export default router;

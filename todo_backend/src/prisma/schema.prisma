@@ -11,7 +11,7 @@ model Author {
   id          Int      @id @default(autoincrement())
   name        String
   nationality String
-  born_date   DateTime
+  born_date   String
   biography   String
   stock_books Int
 
@@ -27,7 +27,7 @@ model Book {
   availability     String // Con stock  o sin stock disponible(Disponible o no disponible) --- esto se podria actualizar con un if-statement
   stock            Int      @default(0) // Idealmente se carga esto por frontend-backend pero si no se especifica se pone 0 
   title            String
-  publication_date DateTime
+  publication_date String
   genre            String
   language         String
   loan_price       Decimal
@@ -43,8 +43,8 @@ model Loans {
   book_id     Int
   price       Decimal
   reader      String
-  loan_date   DateTime
-  return_date DateTime
+  loan_date   String
+  return_date String
 
   // @@map("prestamos") // Mapea el Loan con la tabla "prestamos"  --- USAR EN CASO DE SER NECESARIO
 }
