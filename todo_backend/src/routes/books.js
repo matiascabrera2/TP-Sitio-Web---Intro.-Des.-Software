@@ -5,9 +5,19 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get('/', async (req, res) => {
-    const books = await prisma.book.findMany();
-    res.json(books);
-});
+    try {
+      const books = await prisma.book.findMany({
+        include: {
+          author: true,
+        },
+      });
+      console.log('Obteniendo libros:', books);
+      res.json(books);
+    } catch (error) {
+      console.error('Error al obtener libros:', error);
+      res.status(500).json({ error: 'Error al obtener libros' });
+    }
+  });
 
 router.get('/:id', async (req, res) => {
     const book = await prisma.book.findUnique({
@@ -26,20 +36,20 @@ router.post('/', async (req, res) => {
     try {
         const book = await prisma.book.create({
             data: {
-                author_id: req.body.author_id,
-                availability: req.body.availability ?? "No disponible",
-                stock: req.body.stock ?? 0,
-                title: req.body.title ?? "Sin título",
-                publication_date: req.body.publication_date ? new Date(req.body.publication_date) : new Date(),
-                genre: req.body.genre ?? "Sin género",
-                language: req.body.language ?? "Desconocido",
-                loan_price: req.body.loan_price ?? 0,
-            },
+                author_id,
+                availability,
+                stock,
+                title,
+                publication_date,
+                genre,
+                language,
+                // Prisma Decimal puede recibir un número o un string
+                loan_price: loan_price 
+              },
             include: {
                 author: true, // Esto traerá los datos del autor al devolver el libro
             }
         });
-
         res.status(201).json(book);
     } catch (error) {
         console.error('Error creating book:', error);
