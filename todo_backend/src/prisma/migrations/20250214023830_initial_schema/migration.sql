@@ -3,7 +3,7 @@ CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "nationality" TEXT NOT NULL,
-    "born_date" TIMESTAMP(3) NOT NULL,
+    "born_date" TEXT NOT NULL,
     "biography" TEXT NOT NULL,
     "stock_books" INTEGER NOT NULL,
 
@@ -17,10 +17,9 @@ CREATE TABLE "Book" (
     "availability" TEXT NOT NULL,
     "stock" INTEGER NOT NULL DEFAULT 0,
     "title" TEXT NOT NULL,
-    "publication_date" TIMESTAMP(3) NOT NULL,
+    "publication_date" TEXT NOT NULL,
     "genre" TEXT NOT NULL,
     "language" TEXT NOT NULL,
-    "loan_price" DECIMAL(65,30) NOT NULL,
 
     CONSTRAINT "Book_pkey" PRIMARY KEY ("id")
 );
@@ -31,8 +30,8 @@ CREATE TABLE "Loans" (
     "book_id" INTEGER NOT NULL,
     "price" DECIMAL(65,30) NOT NULL,
     "reader" TEXT NOT NULL,
-    "loan_date" TIMESTAMP(3) NOT NULL,
-    "return_date" TIMESTAMP(3) NOT NULL,
+    "loan_date" TEXT NOT NULL,
+    "return_date" TEXT NOT NULL,
 
     CONSTRAINT "Loans_pkey" PRIMARY KEY ("id")
 );

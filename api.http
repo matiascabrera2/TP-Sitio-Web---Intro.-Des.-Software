@@ -4,14 +4,13 @@ Content-Type: application/json
 
 {
   
-  "author_id": 9,
+  "author_id": 3,
   "availability": "Disponible",
   "stock": 10,
   "title": "Mi libro",
   "publication_date": "12/07/2000",
   "genre": "Novela",
   "language": "Español",
-  "loan_price": 12.50
 }
 ###
 POST http://localhost:5000/api/authors
