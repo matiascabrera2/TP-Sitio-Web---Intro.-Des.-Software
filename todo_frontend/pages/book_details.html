@@ -128,7 +128,6 @@
                 <p><strong>Disponibilidad:</strong> 
                     <span id="book-availability" class="availability"></span>
                 </p>
-                <p><strong>Precio del Préstamo:</strong> $<span id="book-loan-price"></span></p>
             </div>
         </div>
         <div class="back-button">
@@ -176,7 +175,6 @@
                 document.getElementById('book-publication-date').textContent = book.publication_date;
                 document.getElementById('book-availability').textContent = book.stock > 0 ? 'Disponible' : 'No disponible';
                 document.getElementById('book-availability').className = book.stock > 0 ? 'availability' : 'no-availability';
-                document.getElementById('book-loan-price').textContent = book.loan_price;
                 document.getElementById('book-cover').src = book.cover_image || 'images/icon.png';
             }
 
