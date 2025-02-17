@@ -173,8 +173,8 @@
                 document.getElementById('book-genre').textContent = book.genre;
                 document.getElementById('book-language').textContent = book.language;
                 document.getElementById('book-publication-date').textContent = book.publication_date;
-                document.getElementById('book-availability').textContent = book.stock > 0 ? 'Disponible' : 'No disponible';
-                document.getElementById('book-availability').className = book.stock > 0 ? 'availability' : 'no-availability';
+                document.getElementById('book-availability').textContent = (book.availability == 'Disponible' ? 'Disponible': 'No disponible');
+                document.getElementById('book-availability').className = (book.availability == 'Disponible' ? 'availability' : 'no-availability');
                 document.getElementById('book-cover').src = book.cover_image || 'images/icon.png';
             }
 
