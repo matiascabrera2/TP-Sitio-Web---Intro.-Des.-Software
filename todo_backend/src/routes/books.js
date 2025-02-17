@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
       // Desestructuramos los valores del body
-      const { author_id, availability, stock, title, publication_date, genre, language, loan_price } = req.body;
+      const { author_id, availability, stock, title, publication_date, genre, language} = req.body;
       
       const book = await prisma.book.create({
         data: {
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
           availability: availability ?? "No disponible",
           stock: stock ?? 0,
           title: title ?? "Sin título",
-          publication_date: "Sin fecha",
+          publication_date: publication_date ?? "Sin fecha",
           genre: genre ?? "Sin género",
           language: language ?? "Desconocido",
         },
