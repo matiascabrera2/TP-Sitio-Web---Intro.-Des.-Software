@@ -1,15 +1,28 @@
-* {
+body {
     background-color: rgb(255, 228, 196);
 }
 
 /* Navbar */
-.navbar {
-    padding: 2rem;
+body {
+    background-color: rgb(255, 228, 196);
+    padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
 }
 
-.navbar-collapse {
-    align-self: center;
-    justify-content: space-between;
+/* Navbar */
+.navbar {
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease;
+    background-color: rgb(255, 228, 196);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro al hacer scroll */
+}
+
+.navbar.scrolled .nav-link {
+    color: white !important; /* Cambia el color de los enlaces a blanco */
 }
 
 #title {
@@ -18,8 +31,40 @@
     align-content: center;
 }
 
+.card {
+    transition: transform 0.2s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+}
 .card:hover {
-    background-color: black;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    padding: 1.5rem;
+    background-color: #a6e3f1;
+}
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+.availability {
+    font-weight: bold;
+    color: rgb(0, 135, 54); /* Verde para disponibilidad */
+}
+.no-availability {
+    font-weight: bold;
+    color: red; /* Rojo para no disponibilidad */
 }
 
 /* Responsive */
@@ -28,18 +73,3 @@
         display: none;
     }
 }
-
-<style>
-  /* Elimina el margen lateral de .table-responsive */
-  .table-responsive {
-    margin: 0;
-  }
-  
-  /* Ajusta el ancho máximo del contenedor si es necesario */
-  .loans-section .container {
-    max-width: 100%;
-    padding: 0 15px;
-  }
-
-  /* Resto de tus estilos... */
-</style>
