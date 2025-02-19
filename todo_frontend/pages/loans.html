@@ -89,7 +89,7 @@
               <td>${loan.return_date}</td>
               <td>
                 <button class="btn btn-edit btn-sm me-1" data-id="${loan.id}">Editar</button>
-                <button class="btn btn-delete btn-sm" data-id="${loan.id}">Eliminar</button>
+                <button class="btn btn-delete btn-sm" data-id="${loan.id}">Devuelto</button>
               </td>
             `;
             tableBody.appendChild(row);
@@ -104,7 +104,7 @@
         }
         if (event.target.classList.contains("btn-delete")) {
           const id = event.target.dataset.id;
-          if (confirm("¿Estás seguro de eliminar este préstamo?")) {
+          if (confirm("¿Estás seguro de marcar este préstamo como devuelto?")) {
             fetch(`http://localhost:5000/api/loans/${id}`, {
               method: "DELETE"
             })
@@ -113,7 +113,7 @@
                 return response.json();
               })
               .then(data => {
-                alert("Préstamo eliminado correctamente");
+                alert("Préstamo devuelto correctamente");
                 location.reload(); 
               })
               .catch(error => {
