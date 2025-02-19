@@ -1,76 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Crear Autor</title>
-  <link rel="stylesheet" href="./assets/formulario.css" />
-  <!-- Bootstrap (opcional para estilos) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background-color: #f8f9fa; }
-    .container { max-width: 600px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulario para añadir un nuevo autor">
+    <meta name="keywords" content="HTML, CSS, JavaScript, NodeJS, Prisma">
+    <title>Añadir Autor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/style.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mt-4">
-    <h1>Crear Autor</h1>
-    <form id="authorCreateForm">
-      <div class="mb-3">
-        <label for="createAuthorName" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="createAuthorName" name="name" required>
-      </div>
-      <div class="mb-3">
-        <label for="createAuthorNationality" class="form-label">Nacionalidad</label>
-        <input type="text" class="form-control" id="createAuthorNationality" name="nationality" required>
-      </div>
-      <div class="mb-3">
-        <label for="createAuthorBornDate" class="form-label">Fecha de Nacimiento</label>
-        <input type="text" class="form-control" id="createAuthorBornDate" name="born_date" required>
-      </div>
-      <div class="mb-3">
-        <label for="createAuthorBiography" class="form-label">Biografía</label>
-        <textarea class="form-control" id="createAuthorBiography" name="biography" rows="3"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="createAuthorStockBooks" class="form-label">Stock de Libros</label>
-        <input type="number" class="form-control" id="createAuthorStockBooks" name="stock_books" min="0" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Crear Autor</button>
-    </form>
-  </div>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggler">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icon.png" width="50" alt="Website icon">
+                </a>
+                <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loans.html">Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="authors.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark" href="create_author.html">Añadir Autor</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <script>
-    document.getElementById('authorCreateForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const newAuthor = {
-        name: document.getElementById('createAuthorName').value,
-        nationality: document.getElementById('createAuthorNationality').value,
-        born_date: document.getElementById('createAuthorBornDate').value,
-        biography: document.getElementById('createAuthorBiography').value,
-        stock_books: parseInt(document.getElementById('createAuthorStockBooks').value, 10)
-      };
+    <section class="container mt-5 pt-5">
+        <h1 class="page-title">Añadir Nuevo Autor</h1>
+        <form id="createAuthorForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="birthdate" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="mb-3">
+                <label for="biography" class="form-label">Biografía</label>
+                <textarea class="form-control" id="biography" name="biography" rows="4" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="nationality" class="form-label">Nacionalidad</label>
+                <select class="form-control" id="nationality" name="nationality" required>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Brasil">Brasil</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir Autor</button>
+        </form>
+    </section>
 
-      fetch('http://localhost:5000/api/authors', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newAuthor)
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("Error al crear el autor");
-        return response.json();
-      })
-      .then(data => {
-        alert("Autor creado exitosamente");
-        window.location.href = 'authors.html'; // Redirige a la lista de autores
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Error al crear el autor");
-      });
-    });
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('createAuthorForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = {
+        name: document.getElementById('name').value,
+        born_date: document.getElementById('birthdate').value, // Cambio de birthdate a born_date
+        biography: document.getElementById('biography').value,
+        nationality: document.getElementById('nationality').value
+    };
+    try {
+        const response = await fetch('http://localhost:5000/api/authors', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+        if (!response.ok) {
+            throw new Error('Error al añadir el autor');
+        }
+        alert('Autor añadido exitosamente');
+        window.location.href = 'authors.html';
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al añadir el autor');
+    }
+});
+    </script>
 </body>
 </html>

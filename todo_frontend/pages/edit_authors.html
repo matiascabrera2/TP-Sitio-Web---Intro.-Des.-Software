@@ -1,90 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Editar Autor</title>
-  <link rel="stylesheet" href="./assets/formulario.css" />
-  <!-- Bootstrap (opcional para estilos) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulario para editar un autor">
+    <meta name="keywords" content="HTML, CSS, JavaScript, NodeJS, Prisma">
+    <title>Editar Autor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/style.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mt-4">
-    <h1>Editar Autor</h1>
-    <form id="authorEditForm">
-      <div class="mb-3">
-        <label for="editAuthorName" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="editAuthorName" name="name" required />
-      </div>
-      <div class="mb-3">
-        <label for="editAuthorNationality" class="form-label">Nacionalidad</label>
-        <input type="text" class="form-control" id="editAuthorNationality" name="nationality" required />
-      </div>
-      <div class="mb-3">
-        <label for="editAuthorBornDate" class="form-label">Fecha de Nacimiento</label>
-        <input type="text" class="form-control" id="editAuthorBornDate" name="born_date" required />
-      </div>
-      <div class="mb-3">
-        <label for="editAuthorBio" class="form-label">Biografía</label>
-        <textarea class="form-control" id="editAuthorBio" name="biography" rows="3"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="editAuthorStockBooks" class="form-label">Stock de Libros</label>
-        <input type="number" class="form-control" id="editAuthorStockBooks" name="stock_books" min="0" required />
-      </div>
-      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    </form>
-  </div>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggler">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icon.png" width="50" alt="Website icon">
+                </a>
+                <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loans.html">Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="authors.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark" href="create_authors.html">Añadir Autor</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <script>
-    // Obtener el id del autor desde la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const authorId = urlParams.get('id');
+    <section class="container mt-5 pt-5">
+        <h1 class="page-title">Editar Autor</h1>
+        <form id="editAuthorForm">
+            <input type="hidden" id="author_id">
+            
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="nationality" class="form-label">Nacionalidad</label>
+                <select class="form-control" id="nationality" name="nationality" required>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Francia">Francia</option>
+                    <option value="Brasil">Brasil</option>
+                </select>
+            </div>
 
-    // Cargar los datos del autor para precargar el formulario
-    fetch(`http://localhost:5000/api/authors/${authorId}`)
-      .then(response => {
-        if (!response.ok) throw new Error("Error al obtener los datos del autor");
-        return response.json();
-      })
-      .then(author => {
-        document.getElementById('editAuthorName').value = author.name;
-        document.getElementById('editAuthorNationality').value = author.nationality;
-        const bornDate = new Date(author.born_date).toISOString().split('T')[0];
-        document.getElementById('editAuthorBornDate').value = bornDate;
-        document.getElementById('editAuthorBio').value = author.biography;
-        document.getElementById('editAuthorStockBooks').value = author.stock_books;
-      })
-      .catch(error => console.error(error));
+            <div class="mb-3">
+                <label for="born_date" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="born_date" name="born_date" required>
+            </div>
 
-    // Manejar el envío del formulario de edición usando fetch con método PATCH
-    document.getElementById('authorEditForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const updatedAuthor = {
-        name: document.getElementById('editAuthorName').value,
-        nationality: document.getElementById('editAuthorNationality').value,
-        born_date: document.getElementById('editAuthorBornDate').value,
-        biography: document.getElementById('editAuthorBio').value,
-        stock_books: parseInt(document.getElementById('editAuthorStockBooks').value,10)
-      };
+            <div class="mb-3">
+                <label for="biography" class="form-label">Biografía</label>
+                <textarea class="form-control" id="biography" name="biography" rows="3" required></textarea>
+            </div>
 
-      fetch(`http://localhost:5000/api/authors/${authorId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedAuthor)
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("Error al actualizar el autor");
-        return response.json();
-      })
-      .then(data => {
-        alert("Autor actualizado exitosamente");
-        window.location.href = 'authors.html'; // Redirige a la lista de autores
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Error al actualizar el autor");
-      });
-    });
-  </script>
+            <div class="mb-3">
+                <label for="stock_books" class="form-label">Libros en Stock</label>
+                <input type="number" class="form-control" id="stock_books" name="stock_books" required min="0">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Actualizar Autor</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const params = new URLSearchParams(window.location.search);
+            const authorId = params.get("id");
+
+            if (!authorId) {
+                alert("No se proporcionó un ID de autor válido.");
+                window.location.href = "authors.html";
+                return;
+            }
+
+            document.getElementById("author_id").value = authorId;
+
+            try {
+                const authorResponse = await fetch(`http://localhost:5000/api/authors/${authorId}`);
+                if (!authorResponse.ok) throw new Error("No se pudo cargar el autor.");
+                const author = await authorResponse.json();
+
+                document.getElementById("name").value = author.name;
+                document.getElementById("nationality").value = author.nationality;
+                document.getElementById("born_date").value = author.born_date;
+                document.getElementById("biography").value = author.biography;
+                document.getElementById("stock_books").value = author.stock_books;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un error al cargar los datos.");
+            }
+        });
+
+        document.getElementById("editAuthorForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            
+            const authorId = document.getElementById("author_id").value;
+
+            const formData = {
+                name: document.getElementById("name").value,
+                nationality: document.getElementById("nationality").value,
+                born_date: document.getElementById("born_date").value,
+                biography: document.getElementById("biography").value,
+                stock_books: parseInt(document.getElementById("stock_books").value)
+            };
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/authors/${authorId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error al actualizar el autor.");
+                }
+
+                alert("Autor actualizado exitosamente.");
+                window.location.href = "authors.html";
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un error al actualizar el autor.");
+            }
+        });
+    </script>
 </body>
 </html>
