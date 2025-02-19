@@ -45,8 +45,8 @@
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="birthdate" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                <label for="born_date" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="born_date" name="born_date" required>
             </div>
             <div class="mb-3">
                 <label for="biography" class="form-label">Biografía</label>
@@ -72,7 +72,7 @@
     event.preventDefault();
     const formData = {
         name: document.getElementById('name').value,
-        born_date: document.getElementById('birthdate').value, // Cambio de birthdate a born_date
+        born_date: document.getElementById('born_date').value, // Cambio de birthdate a born_date
         biography: document.getElementById('biography').value,
         nationality: document.getElementById('nationality').value
     };
