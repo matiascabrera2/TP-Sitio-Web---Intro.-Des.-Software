@@ -47,20 +47,20 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
       // Desestructuramos los valores del body
-      const { author_id, availability, stock, title, publication_date, genre, language} = req.body;
+      const { author_id, stock, title, publication_date, genre, language} = req.body;
       
       const book = await prisma.book.create({
         data: {
           author_id: parseInt(author_id, 10),
-          availability: availability ?? "No disponible",
-          stock: stock ?? 0,
+          availability: stock > 0 ? "Disponible" : "No disponible",
+          stock: parseInt(stock, 10) ?? 0,
           title: title ?? "Sin título",
           publication_date: publication_date ?? "Sin fecha",
           genre: genre ?? "Sin género",
           language: language ?? "Desconocido",
         },
         include: {
-          author: true, // Incluye los datos del autor en la respuesta
+          author: true, // Para incluir los datos del autor en la respuesta
         }
       });
   
@@ -89,7 +89,7 @@ router.patch('/:id', async (req, res) => {
         },
         data: {
             author_id: req.body.author_id,
-            availability: req.body.availability,
+            availability: req.body.stock > 0 ? "Disponible" : "No disponible",
             stock: req.body.stock,
             title: req.body.title,
             publication_date: req.body.publication_date,
