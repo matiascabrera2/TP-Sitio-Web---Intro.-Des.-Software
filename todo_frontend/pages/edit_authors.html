@@ -68,11 +68,6 @@
                 <textarea class="form-control" id="biography" name="biography" rows="3" required></textarea>
             </div>
 
-            <div class="mb-3">
-                <label for="stock_books" class="form-label">Libros en Stock</label>
-                <input type="number" class="form-control" id="stock_books" name="stock_books" required min="0">
-            </div>
-
             <button type="submit" class="btn btn-primary">Actualizar Autor</button>
         </form>
     </section>
@@ -100,7 +95,6 @@
                 document.getElementById("nationality").value = author.nationality;
                 document.getElementById("born_date").value = author.born_date;
                 document.getElementById("biography").value = author.biography;
-                document.getElementById("stock_books").value = author.stock_books;
             } catch (error) {
                 console.error("Error:", error);
                 alert("Hubo un error al cargar los datos.");
@@ -117,7 +111,6 @@
                 nationality: document.getElementById("nationality").value,
                 born_date: document.getElementById("born_date").value,
                 biography: document.getElementById("biography").value,
-                stock_books: parseInt(document.getElementById("stock_books").value)
             };
 
             try {
