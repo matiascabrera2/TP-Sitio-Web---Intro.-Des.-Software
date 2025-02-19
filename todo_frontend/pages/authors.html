@@ -75,25 +75,26 @@
           return response.json();
         })
         .then(authors => {
-          const tableBody = document.getElementById('authorsTable');
-          tableBody.innerHTML = ''; 
-          authors.forEach(author => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${author.id}</td>
-              <td>${author.name}</td>
-              <td>${author.nationality}</td>
-              <td>${author.born_date}</td>
-              <td>${author.biography}</td>
-              <td>${author.stock_books}</td>
-              <td>
-                <button class="btn btn-edit btn-sm me-1" data-id="${author.id}">Editar</button>
-                <button class="btn btn-delete btn-sm" data-id="${author.id}">Eliminar</button>
-              </td>
-            `;
-            tableBody.appendChild(row);
-          });
-        })
+  const tableBody = document.getElementById('authorsTable');
+  tableBody.innerHTML = ''; 
+  authors.forEach(author => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${author.id}</td>
+      <td>${author.name}</td>
+      <td>${author.nationality}</td>
+      <td>${author.born_date}</td>
+      <td>${author.biography}</td>
+      <td>${author.books.length}</td>
+      <td>
+        <button class="btn btn-edit btn-sm me-1" data-id="${author.id}">Editar</button>
+        <button class="btn btn-delete btn-sm" data-id="${author.id}">Eliminar</button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+})
+
         .catch(error => console.error("Error:", error));
       
       document.getElementById('authorsTable').addEventListener('click', (event) => {
