@@ -6,20 +6,18 @@ const prisma = new PrismaClient();
 
 //  ------- ENDPOINTS --------
 router.get('/', async (req, res) => {
-    // Busco listar todos los préstamos
     const loans = await prisma.loans.findMany({
-        include: { book: true }, // Incluir datos del libro (opcional)
+        include: { book: true },
     });
     res.json(loans);
 });
 
 router.get('/:id', async (req, res) => {
-    // Busco listar solo un préstamo
     const loan = await prisma.loans.findUnique({
         where: {
             id: parseInt(req.params.id),
         },
-        include: { book: true }, // Incluir datos del libro (opcional)
+        include: { book: true },
     });
     if (loan === null) {
         res.sendStatus(404);
@@ -30,7 +28,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        // Obtener el libro para verificar el stock
         const book = await prisma.book.findUnique({
             where: { id: req.body.book_id },
             select: { stock: true }
@@ -54,7 +51,6 @@ router.post('/', async (req, res) => {
             },
         });
 
-        // Reduce en 1 el stock del libro prestado
         await prisma.book.update({
             where: { id: req.body.book_id },
             data: { stock: { decrement: 1 } },
@@ -69,7 +65,6 @@ router.post('/', async (req, res) => {
 
 
 router.patch('/:id', async (req, res) => {
-    // Actualiza un préstamo por medio del ID
     let loan = await prisma.loans.findUnique({
         where: {
             id: parseInt(req.params.id),
@@ -98,7 +93,6 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        // Buscar el préstamo antes de eliminarlo para obtener el book_id
         const loan = await prisma.loans.findUnique({
             where: {
                 id: parseInt(req.params.id),
@@ -113,7 +107,6 @@ router.delete('/:id', async (req, res) => {
             where: { id: loan.id },
         });
 
-        // Aumentar en 1 el stock del libro devuelto
         await prisma.book.update({
             where: { id: loan.book_id },
             data: { stock: { increment: 1 } },

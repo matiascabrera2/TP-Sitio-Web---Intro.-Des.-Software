@@ -72,7 +72,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            // Obtener el ID del préstamo desde la URL
             const urlParams = new URLSearchParams(window.location.search);
             const loanId = urlParams.get('id');
 
@@ -83,14 +82,12 @@
             }
 
             try {
-                // Obtener el préstamo existente
                 const loanResponse = await fetch(`http://localhost:5000/api/loans/${loanId}`);
                 if (!loanResponse.ok) {
                     throw new Error("Préstamo no encontrado.");
                 }
                 const loan = await loanResponse.json();
 
-                // Obtener lista de libros
                 const booksResponse = await fetch("http://localhost:5000/api/books");
                 const books = await booksResponse.json();
                 const bookSelect = document.getElementById("book_id");
@@ -101,16 +98,16 @@
                     option.value = book.id;
                     option.textContent = book.title;
                     if (book.id === loan.book_id) {
-                        option.selected = true; // Seleccionar el libro actual del préstamo
+                        option.selected = true;
                     }
                     bookSelect.appendChild(option);
                 });
 
-                // Llenar el formulario con los datos del préstamo
+                // Llena el formulario con los datos del préstamo
                 document.getElementById("price").value = loan.price;
                 document.getElementById("reader").value = loan.reader;
-                document.getElementById("loan_date").value = loan.loan_date.split('T')[0]; // Formatear fecha
-                document.getElementById("return_date").value = loan.return_date.split('T')[0]; // Formatear fecha
+                document.getElementById("loan_date").value = loan.loan_date.split('T')[0]; // Formatea la fecha
+                document.getElementById("return_date").value = loan.return_date.split('T')[0]; // Formatea la fecha
             } catch (error) {
                 console.error("Error:", error);
                 alert("Hubo un error al cargar los datos del préstamo.");
@@ -121,7 +118,6 @@
         document.getElementById("editLoanForm").addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            // Obtener el ID del préstamo desde la URL
             const urlParams = new URLSearchParams(window.location.search);
             const loanId = urlParams.get('id');
 

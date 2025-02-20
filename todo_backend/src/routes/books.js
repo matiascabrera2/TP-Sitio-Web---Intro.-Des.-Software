@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const router = express.Router();
 const prisma = new PrismaClient();
 
+//  ------- ENDPOINTS --------
 router.get('/', async (req, res) => {
     try {
       const books = await prisma.book.findMany({
@@ -20,10 +21,8 @@ router.get('/', async (req, res) => {
   });
 
   router.get('/:id', async (req, res) => {
-    // Extrae y convierte el id a número
     const id = parseInt(req.params.id, 10);
-  
-    // Verifica si el id es válido
+
     if (!id) {
       return res.status(400).json({ error: 'ID no válido' });
     }
@@ -46,7 +45,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      // Desestructuramos los valores del body
       const { author_id, stock, title, publication_date, genre, language} = req.body;
       
       const book = await prisma.book.create({
@@ -60,7 +58,7 @@ router.post('/', async (req, res) => {
           language: language ?? "Desconocido",
         },
         include: {
-          author: true, // Para incluir los datos del autor en la respuesta
+          author: true,
         }
       });
   

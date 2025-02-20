@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const router = express.Router();
 const prisma = new PrismaClient();
 
+//  ------- ENDPOINTS --------
 router.get('/', async (req, res) => {
     const authors = await prisma.author.findMany({
         include: { books: true },
@@ -82,7 +83,6 @@ router.delete('/:id', async (req, res) => {
       res.json(author);
     } catch (error) {
       console.error("Error al eliminar el autor :", error);
-      // Devuelve un status 400 y un mensaje de error que indique que no se puede eliminar el registro
       res.status(400).json({
         error: "No se puede eliminar ese registro, porque de ese registro depende algún préstamo o algún libro"
       });

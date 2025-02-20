@@ -103,11 +103,11 @@
             document.getElementById("book_id").value = bookId;
 
             try {
-                // Obtener lista de autores
+                // Agrega cada autor a la lista desplegable
                 const authorsResponse = await fetch("http://localhost:5000/api/authors");
                 const authors = await authorsResponse.json();
                 const authorSelect = document.getElementById("author_id");
-
+                
                 authors.forEach(author => {
                     const option = document.createElement("option");
                     option.value = author.id;
@@ -115,7 +115,7 @@
                     authorSelect.appendChild(option);
                 });
 
-                // Obtener datos del libro a editar
+                // Obtiene los datos del libro a editarlo
                 const bookResponse = await fetch(`http://localhost:5000/api/books/${bookId}`);
                 if (!bookResponse.ok) throw new Error("No se pudo cargar el libro.");
                 const book = await bookResponse.json();

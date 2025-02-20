@@ -67,7 +67,6 @@
             const bookIdParam = urlParams.get("book_id");
 
             try {
-                // Obtener lista de libros
                 const booksResponse = await fetch("http://localhost:5000/api/books");
                 const books = await booksResponse.json();
                 const bookSelect = document.getElementById("book_id");

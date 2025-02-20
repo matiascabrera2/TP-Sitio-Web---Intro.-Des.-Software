@@ -8,7 +8,7 @@ body {
 
 body {
     background-color: rgb(255, 228, 196);
-    padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+    padding-top: 70px;
 }
 
 /* Navbar */
@@ -21,23 +21,23 @@ body {
 }
 
 .navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro al hacer scroll */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .navbar.scrolled .nav-link {
-    color: white !important; /* Cambia el color de los enlaces a blanco */
+    color: white !important;
 }
 
 .navbar.scrolled .btn-outline-dark {
-    border-color: white; /* Borde blanco */
-    color: white; /* Texto blanco */
+    border-color: white;
+    color: white;
 }
 
-/* Estilos para el hover del botón en modo .scrolled */
 .navbar.scrolled .btn-outline-dark:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente al hacer hover */
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Index Page */
 #title {
     margin: auto;
     padding: 2rem;
@@ -49,7 +49,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
-    cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+    cursor: pointer;
 }
 
 .card:hover {
@@ -79,12 +79,12 @@ body {
 
 .availability {
     font-weight: bold;
-    color: rgb(0, 135, 54); /* Verde para disponibilidad */
+    color: rgb(0, 135, 54);
 }
 
 .no-availability {
     font-weight: bold;
-    color: red; /* Rojo para no disponibilidad */
+    color: red;
 }
 
 /* Responsive */
@@ -141,12 +141,11 @@ body {
     background-color: #c82333;
 }
 
-/* Estilos para el título */
 .page-title {
     font-family: 'Helvetica', sans-serif;
     text-align: center;
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
     font-weight: bold;
-    padding-top: 80px; /* Añade un margen superior adicional */
+    padding-top: 80px;
 }
