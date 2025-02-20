@@ -1,0 +1,36 @@
+services:
+  postgres:
+    container_name: postgres_db
+    image: postgres:15
+    ports:
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - ./.env 
+    volumes:
+      - ./.volumes/postgres/data:/var/lib/postgresql/data/
+      - ./todo_backend/database:/docker-entrypoint-initdb.d
+
+
+  frontend:
+    container_name: frontend
+    build: ./todo_frontend
+    ports:
+      - "5500:80"
+    volumes:    # Permite mostrar los cambios del front, sin necesidad de reiniciar el container
+      - ./todo_frontend/pages:/usr/local/apache2/htdocs    
+      - ./todo_frontend/pages/assets:/usr/local/apache2/htdocs/assets
+      - ./todo_frontend/pages/images:/usr/local/apache2/htdocs/images
+
+  backend:
+    container_name: backend
+    build:
+      context: ./todo_backend
+    ports:
+      - "5000:5000"   # mappea 5000 del pc al conteiner
+    depends_on:
+      - postgres
+      - frontend
+    env_file:
+      - ./.env
+    volumes:    # Mapea los cambios, lo mismo que volumes-frontend
+      - ./todo_backend/src:/app

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulario para editar un libro">
+    <meta name="keywords" content="HTML, CSS, JavaScript, NodeJS, Prisma">
+    <title>Editar Libro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggler">
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/icon.png" width="50" alt="Website icon">
+                </a>
+                <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loans.html">Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="authors.html">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-dark" href="create_books.html">Añadir Libro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container mt-5 pt-5">
+        <h1 class="page-title">Editar Libro</h1>
+        <form id="editBookForm">
+            <input type="hidden" id="book_id">
+            
+            <div class="mb-3">
+                <label for="author_id" class="form-label">Autor</label>
+                <select class="form-control" id="author_id" name="author_id" required></select>
+            </div>
+
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" required min="0">
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Título</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="publication_date" class="form-label">Fecha de Publicación</label>
+                <input type="date" class="form-control" id="publication_date" name="publication_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="genre" class="form-label">Género</label>
+                <select class="form-control" id="genre" name="genre" required>
+                    <option value="Romance">Romance</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Fantasía">Fantasía</option>
+                    <option value="Terror">Terror</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="language" class="form-label">Idioma</label>
+                <select class="form-control" id="language" name="language" required>
+                    <option value="Español">Español</option>
+                    <option value="Inglés">Inglés</option>
+                    <option value="Francés">Francés</option>
+                    <option value="Portugués">Portugués</option>
+                    <option value="Alemán">Alemán</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Actualizar Libro</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const params = new URLSearchParams(window.location.search);
+            const bookId = params.get("id");
+
+            if (!bookId) {
+                alert("No se proporcionó un ID de libro válido.");
+                window.location.href = "books.html";
+                return;
+            }
+
+            document.getElementById("book_id").value = bookId;
+
+            try {
+                // Agrega cada autor a la lista desplegable
+                const authorsResponse = await fetch("http://localhost:5000/api/authors");
+                const authors = await authorsResponse.json();
+                const authorSelect = document.getElementById("author_id");
+                
+                authors.forEach(author => {
+                    const option = document.createElement("option");
+                    option.value = author.id;
+                    option.textContent = author.name;
+                    authorSelect.appendChild(option);
+                });
+
+                // Obtiene los datos del libro a editarlo
+                const bookResponse = await fetch(`http://localhost:5000/api/books/${bookId}`);
+                if (!bookResponse.ok) throw new Error("No se pudo cargar el libro.");
+                const book = await bookResponse.json();
+
+                document.getElementById("author_id").value = book.author_id;
+                document.getElementById("stock").value = book.stock;
+                document.getElementById("title").value = book.title;
+                document.getElementById("publication_date").value = book.publication_date;
+                document.getElementById("genre").value = book.genre;
+                document.getElementById("language").value = book.language;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un error al cargar los datos.");
+            }
+        });
+
+        document.getElementById("editBookForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            
+            const bookId = document.getElementById("book_id").value;
+
+            const formData = {
+                author_id: parseInt(document.getElementById("author_id").value),
+                stock: parseInt(document.getElementById("stock").value),
+                title: document.getElementById("title").value,
+                publication_date: document.getElementById("publication_date").value,
+                genre: document.getElementById("genre").value,
+                language: document.getElementById("language").value
+            };
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/books/${bookId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error al actualizar el libro.");
+                }
+
+                alert("Libro actualizado exitosamente.");
+                window.location.href = "books.html";
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un error al actualizar el libro.");
+            }
+        });
+    </script>
+</body>
+</html>

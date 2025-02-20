@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  id          Int      @id @default(autoincrement())
+  name        String
+  nationality String
+  born_date   String
+  biography   String
+  stock_books Int
+
+  books Book[] // representa todos los libros que pertenecen a un autor
+
+  @@map("Author") // Mapea Author con la tabla "autor" --- USAR EN CASO DE SER NECESARIO
+}
+
+model Book {
+  id               Int      @id @default(autoincrement())
+  author           Author   @relation(fields: [author_id], references: [id])
+  author_id        Int
+  availability     String // Con stock  o sin stock disponible(Disponible o no disponible) --- esto se podria actualizar con un if-statement
+  stock            Int      @default(0) // Idealmente se carga esto por frontend-backend pero si no se especifica se pone 0 
+  title            String
+  publication_date String
+  genre            String
+  language         String
+
+  loans Loans[] // relacion de un libro que puede ser prestado varias veces segun el stock
+
+  @@map("Book") // Mapea el Book con la tabla "libro"  --- USAR EN CASO DE SER NECESARIO
+}
+
+model Loans {
+  id          Int      @id @default(autoincrement())
+  book        Book     @relation(fields: [book_id], references: [id])
+  book_id     Int
+  price       Decimal
+  reader      String
+  loan_date   String
+  return_date String
+
+  @@map("Loans") // Mapea el Loan con la tabla "prestamos"  --- USAR EN CASO DE SER NECESARIO
+}
+
+// Para hacer migraciones para efectuar cambios:
+// 1. SI NO ESTA NADA CONFIGURADA
+// export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/db_sqlazo?schema=public"
+// npx prisma migrate dev --name initial-schema
+// 2. CONFIGURADA CON DOTENV-cli y agregado con un shortcut (script) en package.json
+// npm run migrate -- migration-name

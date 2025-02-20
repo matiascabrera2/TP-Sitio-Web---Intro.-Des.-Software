@@ -1,0 +1,25 @@
+###
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+  
+  "author_id": 3,
+  "availability": "Disponible",
+  "stock": 10,
+  "title": "Mi libro",
+  "publication_date": "12/07/2000",
+  "genre": "Novela",
+  "language": "Español",
+}
+###
+POST http://localhost:5000/api/authors
+Content-Type: application/json
+
+{
+  "name": "Elrubius",
+  "nationality": "Colombiano",
+  "born_date": "12/12/1970",
+  "biography": "Psicoanalista y escritor",
+  "stock_books": 1
+  }

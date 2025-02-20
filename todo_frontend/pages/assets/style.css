@@ -1,0 +1,151 @@
+/* General */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Helvetica', sans-serif;
+}
+
+body {
+    background-color: rgb(255, 228, 196);
+    padding-top: 70px;
+}
+
+/* Navbar */
+.navbar {
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease;
+    background-color: rgb(255, 228, 196);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar.scrolled .nav-link {
+    color: white !important;
+}
+
+.navbar.scrolled .btn-outline-dark {
+    border-color: white;
+    color: white;
+}
+
+.navbar.scrolled .btn-outline-dark:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Index Page */
+#title {
+    margin: auto;
+    padding: 2rem;
+    align-content: center;
+}
+
+.card {
+    transition: transform 0.2s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+    background-color: #a6e3f1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.availability {
+    font-weight: bold;
+    color: rgb(0, 135, 54);
+}
+
+.no-availability {
+    font-weight: bold;
+    color: red;
+}
+
+/* Responsive */
+@media screen and (max-width: 767px) {
+    .navbar-brand {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .card-img-top {
+        height: 150px;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .card-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* Books Page */
+.table-responsive {
+    margin: 0 5%;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    border: none;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.page-title {
+    font-family: 'Helvetica', sans-serif;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 80px;
+}
